@@ -1,0 +1,87 @@
+{% extends "layout.html" %}
+
+{% block title %}Reset - Početna{% endblock %}
+
+{% block content %}
+    <main>
+        
+        <section id="sessions">
+
+            <div id="sessions-titles">
+                <h1>Gde svaka priča dobija podršku</h1>
+                <h2>Koji tip seanse Vas interesuje?</h2>
+            </div>
+            <div id="session-types">
+                <div class="session-type" id="individual">
+                    <img src="{{ url_for('static', filename='images/individualna.png') }}" alt="" class="session-type-image">
+                    <div class="session-type-text">
+                        <h3>Individualna</h3>
+                        <h4>Za mene</h4>
+                    </div>
+                </div>
+                <div class="session-type" id="couples">
+                    <img src="{{ url_for('static', filename='images/partner.png') }}" alt="" class="session-type-image">
+                    <div class="session-type-text">
+                        <h3>Partnerska</h3>
+                        <h4>Za nas</h4>
+                    </div>
+                </div>
+                <div class="session-type" id="adolescents">
+                    <img src="{{ url_for('static', filename='images/dete.png') }}" alt="" class="session-type-image">
+                    <div class="session-type-text">
+                        <h3>Adolescenti</h3>
+                        <h4>Za moje dete</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="about-us">
+            <div id="about-us-text">
+                <h1>O nama</h1>
+                <div id="about-us-content">
+                    <p>Centar RESET nastao je u septembru 2023. godine kao ostvarenje zajedničkog sna troje kolega – Jelene, Antee i Aleksa. Naša priča započela je još tokom osnovnih studija na fakultetu, gde smo se upoznali i počeli da gradimo temelje profesionalnog i prijateljskog odnosa. Zajedno smo prolazili kroz brojne edukacije, volontiranja, radionice i treninge, međusobno se podržavali i učili jedni od drugih. Kroz sve te godine, podelili smo ne samo profesionalne izazove, već i mnogo lepih trenutaka privatno.</p><p>
+                        Ideja o osnivanju centra rodila se još tada – kao želja da spojimo naš entuzijazam za terapijskim radom, posvećenost pomaganju ljudima i ljubav prema zajedničkom stvaranju. Godinama kasnije, ta ideja je prerasla u stvarnost, vođena željom da stvorimo prostor u kojem ćemo moći da razvijamo svoje ideje i istovremeno pružamo podršku drugima.</p><p>
+                        U ovih godinu i po dana postojanja, naš centar postao je mesto gde se ljudi mogu obratiti za pomoć i podršku, gde mi kao tim rastemo i zajedno razvijamo nove ideje. Ponosni smo na to što kroz rad sa klijentima učimo i mi sami, i što iz dana u dan svedočimo njihovim uspesima, promenama i napretku. Naš tim se međusobno podržava i inspiriše, a centar polako, ali sigurno, nastavlja da raste, baš kao što smo ga i zamislili!</p><p>
+                        Ovo nije samo naš posao – ovo je naš zajednički san, koji živimo i gradimo sa puno strasti, posvećenosti i vere u ono što radimo.</p>
+                </div>
+                
+            </div>
+            <div class="therapist">
+                <img class="therapist-image" src="{{ url_for('static', filename='images/aleks.png') }}" alt="">
+            </div>
+            <div class="therapist">
+                <img class="therapist-image" src="{{ url_for('static', filename='images/jelena.png') }}" alt="">
+            </div>
+            <div class="therapist">
+                <img class="therapist-image" src="{{ url_for('static', filename='images/antea.png') }}" alt="">
+            </div>
+        </section>
+    </main>
+    <script>
+        const therapists = document.getElementsByClassName('therapist')
+        const aboutUsText = document.getElementById('about-us-text');
+        const aboutUsContent = document.getElementById('about-us-content');
+        aboutUsText.addEventListener('click', () => {
+            if (!aboutUsText.classList.contains('active')){
+
+                aboutUsText.style.width = '100%';
+            for (let therapist of therapists) {
+                therapist.style.width = '0%'
+            };
+            aboutUsContent.style.display = "block";
+            aboutUsContent.style.opacity = "1";
+            aboutUsText.classList.add('active')
+            } else {
+                aboutUsText.style.width = '49%';
+            for (let therapist of therapists) {
+                therapist.style.width = '49%'
+            };
+            aboutUsContent.style.display = "none"
+            aboutUsContent.style.opacity = "0";
+            aboutUsText.classList.remove('active')
+            }
+
+          
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,159 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #889b6d;
+    font-family:  "Fraunces", serif;
+    color: white;
+    letter-spacing: 0.15rem;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.8rem;
+}
+
+nav {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 20%;
+}
+
+main {
+    width: 60%;
+    margin: auto;
+}
+
+nav #logo {
+    width: 200px;
+}
+
+nav .links a {
+    color: white;
+    margin-right: 15px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding-right: 25px;
+}
+
+nav .links a:not(:last-child) { 
+    border-right: white solid 2px;
+}
+
+#sessions-titles h1 {
+    font-size: 2rem;
+}
+
+#sessions-titles h2 {
+    font-size: 1.8rem;
+}
+
+#sessions {
+    margin: 100px 0;
+}
+
+#session-types {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 55px;
+}
+
+.session-type {
+    flex: 1;
+    position: relative;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.session-type .session-type-image {
+    width: 100%;
+} 
+
+.session-type .session-type-text {
+    opacity: 0;
+    transition: 0.3s;
+    color: rgb(255, 252, 247);
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    border-radius: 50px;
+}
+
+.session-type:hover .session-type-text {
+    opacity: 1;
+} 
+
+#individual {
+    background-color: #a9bb91;
+}
+
+#couples {
+    background-color: #718653;
+}
+
+#adolescents {
+    background-color: #5b703c;
+}
+
+#about-us {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px 100px;
+    justify-content: space-between;
+}
+
+.therapist, #about-us-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 49%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    padding: 55px;
+    transition: 0.4s;
+}
+
+#about-us-text {
+    flex-direction: column;
+    background-color: #718653;
+    border-radius: 70px 0 70px 0;
+    aspect-ratio: 1 / 1;
+    cursor: pointer;
+}
+
+#about-us-text:hover h1{
+    transition: 0.4s;
+    transform: scale(110%);
+
+}
+#about-us-content {
+    opacity: 0;
+    display: none;
+    transition: opacity 0.4s;
+}
+#about-us-text p {
+    font-size: 1.2rem;
+}
+
+.therapist-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 70px;
+    object-fit: cover;
+}
