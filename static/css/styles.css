@@ -47,11 +47,14 @@ nav .links a:not(:last-child) {
 }
 
 #sessions-titles h1 {
-    font-size: 2rem;
+    font-size: 2.3rem;
+    text-align: center;
 }
 
 #sessions-titles h2 {
-    font-size: 1.8rem;
+    margin-top: 70px;
+    text-align: center;
+    font-size: 2rem;
 }
 
 #sessions {
@@ -77,9 +80,13 @@ nav .links a:not(:last-child) {
     width: 100%;
 } 
 
+.session-type:hover .session-type-image {
+    filter: blur(10px);
+}
+
 .session-type .session-type-text {
     opacity: 0;
-    transition: 0.3s;
+    transition: 0.5s;
     color: rgb(255, 252, 247);
     background-color: rgba(0, 0, 0, 0.4);
     position: absolute;
@@ -111,10 +118,11 @@ nav .links a:not(:last-child) {
 }
 
 #about-us {
+    position: relative;
     aspect-ratio: 1 / 1;
     display: flex;
     flex-wrap: wrap;
-    margin: 50px 100px;
+    margin: 250px 100px;
     justify-content: space-between;
 }
 
@@ -127,6 +135,32 @@ nav .links a:not(:last-child) {
     overflow: hidden;
     padding: 55px;
     transition: 0.4s;
+    position: relative;
+    cursor: pointer;
+}
+
+
+
+.therapist-text {
+    position: absolute;
+    background-color: #718653;
+    border-radius: 50px;
+    padding: 25px;
+    visibility: hidden;
+    bottom: 0;
+    width: 70%;
+    transform: scale(45%);
+    transition: transform 0.4s;
+    text-align: center;
+}
+
+.therapist:hover .therapist-text {
+    transform: none;
+    visibility: visible;
+}
+
+.therapist-text p {
+    margin: 0;
 }
 
 #about-us-text {
@@ -139,7 +173,7 @@ nav .links a:not(:last-child) {
 
 #about-us-text:hover h1{
     transition: 0.4s;
-    transform: scale(110%);
+    transform: scale(125%);
 
 }
 #about-us-content {
@@ -149,6 +183,24 @@ nav .links a:not(:last-child) {
 }
 #about-us-text p {
     font-size: 1.2rem;
+}
+
+#about-us-bg {
+    position: absolute;
+    top: -30%;
+    left: -60%;
+    z-index: -10;
+    width: 2000px;
+}
+
+#about-us-bgcolor {
+    position: absolute;
+    z-index: -10;
+    top: 0;
+    left: -60%;
+    width: 2000px;
+    height: 1000px;
+    background-color: #d7e8be;
 }
 
 .therapist-image {
