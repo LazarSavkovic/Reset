@@ -36,6 +36,7 @@
             </div>
         </section>
         <section id="about-us">
+            <img id="about-us-bg2" src="{{ url_for('static', filename='images/wave2.svg') }}" alt="">
             <img id="about-us-bg" src="{{ url_for('static', filename='images/wave.svg') }}" alt="">
             <div id="about-us-bgcolor"></div>
             <div id="about-us-text">
@@ -76,6 +77,37 @@
                 </div>
             </div>
         </section>
+        <section id="prices">
+            <img id="prices-bg" src="{{ url_for('static', filename='images/wave3.svg') }}" alt="">
+            <img id="prices-bg2" src="{{ url_for('static', filename='images/wave2.svg') }}" alt="">
+            <div id="prices-bgcolor"></div>
+            <div class="prices-content">
+                <div id="prices-individual" class="prices-single">
+                    <div class="prices-text-content">
+                        <h3>INDIVIDUALNE SEANSE</h3>
+                        <p class="read-more">Saznaj više</p>
+                        <div class="prices-text">
+                            <div class="prices-description">
+                                <p>Individualna seansa podrazumeva rad jedan na jedan sa terapeutom u sigurnom i poverljivom okruženju. Seansa može biti održana online, putem Google Meet platforme, ili uživo u prostorijama savetovališta. Podaci do kojih psiholog dolazi u radu sa klijentom poverljive su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti. Prilikom korišćenja podataka sakupljenih tokom rada sa klijentom, psiholog je dužan da sakrije identitet stranke i drugih lica na koje se podaci odnose. Psiholog je dužan da ne otkrije identitet klijenta čak i ako klijent ne traži zaštitu svog identiteta.
+                                    Jedna seansa traje 50 minuta do sat vremena, uz mogućnost zakazivanja duple seanse.</p>
+                            </div>
+                            <div class="all-prices">
+                            <p><span>Online (Srbija):</span>2.500 RSD</p>
+                            <p><span>Online (inostranstvo):</span>25 EUR (+provizija)</p>
+                            <p><span>Uživo:</span>3.000 RSD</p>
+                            <p><span>Seansa na engleskom jeziku:</span>dodatnih 500 RSD / 5 EUR</p>
+                            <p>Ukoliko Vam je potrebna kontinuirana podrška, možemo zajedno kreirati plan rada koji najbolje odgovara Vašim potrebama.</p>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                    <div class="prices-img">
+                        <img src="{{ url_for('static', filename='images/prices-individual.png') }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
     <script>
         const therapists = document.getElementsByClassName('therapist')
@@ -103,5 +135,28 @@
 
           
         });
+
+        const readMores = document.getElementsByClassName('read-more')
+        for (let readMore of readMores){
+            readMore.addEventListener('click', () => {
+                let allPrices = readMore.parentNode.children[2].children[1]
+                let pricesDescription = readMore.parentNode.children[2].children[0]
+                if (readMore.classList.contains('active')){
+                    pricesDescription.style.transform = 'scale(0%)';
+                    allPrices.style.transform = 'scale(100%)';
+                    readMore.classList.remove('active')
+                    readMore.textContent = 'Saznaj više'
+                } else {
+
+                    pricesDescription.style.transform = 'scale(100%)';
+                allPrices.style.transform = 'scale(0%)';
+                readMore.classList.add('active')
+                readMore.textContent = 'Cene'
+                }
+
+            })
+
+            
+        }
     </script>
 {% endblock %}

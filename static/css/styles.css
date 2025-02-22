@@ -7,6 +7,9 @@ body {
     font-family:  "Fraunces", serif;
     color: white;
     letter-spacing: 0.15rem;
+    width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -122,7 +125,7 @@ nav .links a:not(:last-child) {
     aspect-ratio: 1 / 1;
     display: flex;
     flex-wrap: wrap;
-    margin: 250px 100px;
+    padding: 150px 100px;
     justify-content: space-between;
 }
 
@@ -185,21 +188,30 @@ nav .links a:not(:last-child) {
     font-size: 1.2rem;
 }
 
-#about-us-bg {
+#about-us-bg, #about-us-bg2 {
     position: absolute;
-    top: -30%;
-    left: -60%;
     z-index: -10;
-    width: 2000px;
+    width: 2200px;
 }
+
+#about-us-bg {
+    left: -40%;
+    top: 0%;
+}
+
+#about-us-bg2 {
+    left: -50%;
+    top: -5%;
+}
+
 
 #about-us-bgcolor {
     position: absolute;
-    z-index: -10;
-    top: 0;
-    left: -60%;
-    width: 2000px;
-    height: 1000px;
+    z-index: -11;
+    top: 300px;
+    left: -40%;
+    width: 2200px;
+    height: 1500px;
     background-color: #d7e8be;
 }
 
@@ -209,3 +221,98 @@ nav .links a:not(:last-child) {
     border-radius: 70px;
     object-fit: cover;
 }
+
+
+#prices {
+    border: red solid 5px;
+    height: 1000px;
+    position: relative;
+}
+
+
+#prices-bg, #prices-bg2 {
+    position: absolute;
+    z-index: -10;
+    width: 2200px;
+}
+
+#prices-bg2 {
+    left: -40%;
+    top: 0%;
+}
+
+#prices-bg {
+    left: -50%;
+    top: -5%;
+}
+
+#prices-bgcolor {
+    position: absolute;
+    z-index: -11;
+    top: 300px;
+    left: -40%;
+    width: 2200px;
+    height: 1500px;
+    background-color: #f5ffe5;
+}
+
+.prices-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.prices-single {
+    border: yellow 2px solid;
+    height: 33%;
+    display: flex;
+}
+
+.prices-text-content {
+    width: 70%;
+    background-color: #889b6d;
+    padding: 25px;
+    border-radius: 35px;
+}
+
+.prices-img {
+    width: 30%;
+    height: 100%;
+}
+
+.prices-img img {
+    width: 100%;
+    height: 100%;
+}
+
+.read-more {
+    cursor: pointer;
+}
+
+.prices-text {
+    position: relative;
+    height: 100%;
+}
+
+.prices-description {
+    top: 0;
+    left: 0;
+    position: absolute;
+    transform: scale(0%);
+    height: 100%;
+    width: 100%;
+    border: blue 2px solid;
+    transition: 0.4s;
+}
+
+.all-prices {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: red 2px solid;
+    transition: 0.4s;
+}
+
