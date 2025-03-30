@@ -326,3 +326,11 @@ nav .links a:not(:last-child) {
     transition: 0.4s;
 }
 
+
+section.contact form {
+    color: #5b703c;
+    display: flex;
+    flex-direction: column;
+    
+}
+
