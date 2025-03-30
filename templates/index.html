@@ -96,7 +96,6 @@
                             <p><span>Online (inostranstvo):</span>25 EUR (+provizija)</p>
                             <p><span>Uživo:</span>3.000 RSD</p>
                             <p><span>Seansa na engleskom jeziku:</span>dodatnih 500 RSD / 5 EUR</p>
-                            <p>Ukoliko Vam je potrebna kontinuirana podrška, možemo zajedno kreirati plan rada koji najbolje odgovara Vašim potrebama.</p>
                             </div>
                         </div>
                         
@@ -104,6 +103,53 @@
                     </div>
                     <div class="prices-img">
                         <img src="{{ url_for('static', filename='images/prices-individual.png') }}" alt="">
+                    </div>
+                </div>
+                <div id="prices-couple" class="prices-single">
+                    <div class="prices-text-content">
+                        <h3>PARTNERSKE SEANSE</h3>
+                        <p class="read-more">Saznaj više</p>
+                        <div class="prices-text">
+                            <div class="prices-description">
+                                <p>Partnerska seansa je namenjena parovima koji žele da rade na svojoj vezi, komunikaciji, razumevanju i rešavanju problema uz pomoć terapeuta. Seanse mogu biti održane online, putem Google Meet platforme, ili uživo u prostorijama savetovališta. Podaci do kojih psiholog dolazi u radu sa klijentima poverljive su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti. Prilikom korišćenja podataka sakupljenih tokom rada sa klijentima, psiholog je dužan da sakrije identitet stranaka i drugih lica na koje se podaci odnose. Psiholog je dužan da ne otkrije identitete klijenata čak i ako klijenti ne traže zaštitu svojih identiteta.
+                                    Jedna seansa traje 50 minuta do sat vremena, uz mogućnost zakazivanja duple seanse.</p>
+                            </div>
+                            <div class="all-prices">
+                            <p><span>Online (Srbija):</span>3.500 RSD</p>
+                            <p><span>Online (inostranstvo):</span>35 EUR (+provizija)</p>
+                            <p><span>Uživo:</span>4.000 RSD</p>
+                            <p><span>Seansa na engleskom jeziku:</span>dodatnih 500 RSD / 5 EUR</p>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                    <div class="prices-img">
+                        <img src="{{ url_for('static', filename='images/prices-couple.png') }}" alt="">
+                    </div>
+                </div>
+                <div id="prices-teen" class="prices-single">
+                    <div class="prices-text-content">
+                        <h3>ZA MOJE DETE</h3>
+                        <p class="read-more">Saznaj više</p>
+                        <div class="prices-text">
+                            <div class="prices-description">
+                                <p>Seanse za adolescente omogućavaju mladima da uz podršku terapeuta pronađu načine da se nose sa izazovima kroz koje prolaze. Individualni rad sa terapeutom može se odvijati online, putem Google Meet platforme ili uživo u prostorijama savetovališta. Podaci do kojih psiholog dolazi u radu sa klijentom poverljive su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti. Prilikom korišćenja podataka sakupljenih tokom rada sa klijentom, psiholog je dužan da sakrije identitet stranke i drugih lica na koje se podaci odnose. Psiholog je dužan da ne otkrije identitet klijenta čak i ako klijent ne traži zaštitu svog identiteta.
+                                    Seanse su dostupne za maloletna lica, pri čemu je za one između 14 i 16 godina neophodan pristanak roditelja. Sa decom mlađom od 14 godina ne radimo.
+                                    Jedna seansa traje 50 minuta do sat vremena, uz mogućnost zakazivanja duple seanse.</p>
+                            </div>
+                            <div class="all-prices">
+                            <p><span>Online (Srbija):</span>2.500 RSD</p>
+                            <p><span>Online (inostranstvo):</span>25 EUR (+provizija)</p>
+                            <p><span>Uživo:</span>3.000 RSD</p>
+                            <p><span>Seansa na engleskom jeziku:</span>dodatnih 500 RSD / 5 EUR</p>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+                    <div class="prices-img">
+                        <img src="{{ url_for('static', filename='images/prices-teen.png') }}" alt="">
                     </div>
                 </div>
             </div>
@@ -137,8 +183,10 @@
         });
 
         const readMores = document.getElementsByClassName('read-more')
+        
         for (let readMore of readMores){
             readMore.addEventListener('click', () => {
+                const pricesImg = readMore.parentElement.parentElement.querySelector('.prices-img')
                 let allPrices = readMore.parentNode.children[2].children[1]
                 let pricesDescription = readMore.parentNode.children[2].children[0]
                 if (readMore.classList.contains('active')){
@@ -146,12 +194,14 @@
                     allPrices.style.transform = 'scale(100%)';
                     readMore.classList.remove('active')
                     readMore.textContent = 'Saznaj više'
+                    pricesImg.style.flex = '1'
                 } else {
 
                     pricesDescription.style.transform = 'scale(100%)';
                 allPrices.style.transform = 'scale(0%)';
                 readMore.classList.add('active')
                 readMore.textContent = 'Cene'
+                pricesImg.style.flex = '0'
                 }
 
             })

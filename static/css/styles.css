@@ -191,27 +191,27 @@ nav .links a:not(:last-child) {
 #about-us-bg, #about-us-bg2 {
     position: absolute;
     z-index: -10;
-    width: 2200px;
+    width: 125vw;
 }
 
 #about-us-bg {
-    left: -40%;
-    top: 0%;
+    left: -25vw;
+    top: 0vw;
 }
 
 #about-us-bg2 {
-    left: -50%;
-    top: -5%;
+    left: -35vw;
+    top: -3vw;
 }
 
 
 #about-us-bgcolor {
     position: absolute;
     z-index: -11;
-    top: 300px;
-    left: -40%;
-    width: 2200px;
-    height: 1500px;
+    top: 30vw;
+    left: -25vw;
+    width: 125vw;
+    height: 80vw;
     background-color: #d7e8be;
 }
 
@@ -224,8 +224,7 @@ nav .links a:not(:last-child) {
 
 
 #prices {
-    border: red solid 5px;
-    height: 1000px;
+    height: 140vh;
     position: relative;
 }
 
@@ -233,25 +232,25 @@ nav .links a:not(:last-child) {
 #prices-bg, #prices-bg2 {
     position: absolute;
     z-index: -10;
-    width: 2200px;
+    width: 125vw;
 }
 
 #prices-bg2 {
-    left: -40%;
-    top: 0%;
+    left: -25vw;
+    top: 0vw;
 }
 
 #prices-bg {
-    left: -50%;
-    top: -5%;
+    left: -35vw;
+    top: -3vw;
 }
 
 #prices-bgcolor {
     position: absolute;
     z-index: -11;
-    top: 300px;
-    left: -40%;
-    width: 2200px;
+    top: 10vw;
+    left: -25vw;
+    width: 125vw;
     height: 1500px;
     background-color: #f5ffe5;
 }
@@ -260,33 +259,46 @@ nav .links a:not(:last-child) {
     display: flex;
     flex-direction: column;
     height: 100%;
+    gap: 12px;
 }
 
 .prices-single {
-    border: yellow 2px solid;
     height: 33%;
     display: flex;
+    gap: 9px;
+}
+
+#prices-couple {
+    flex-direction: row-reverse;
 }
 
 .prices-text-content {
-    width: 70%;
+    flex: 1;
     background-color: #889b6d;
     padding: 25px;
     border-radius: 35px;
 }
 
 .prices-img {
-    width: 30%;
+    flex: 1;
     height: 100%;
+    transition: 0.3s;
+}
+
+.prices-text-content p {
+    margin: 8px;
 }
 
 .prices-img img {
     width: 100%;
     height: 100%;
+    border-radius: 35px;
 }
 
 .read-more {
     cursor: pointer;
+    font-weight: 800;
+    text-decoration: underline;
 }
 
 .prices-text {
@@ -301,7 +313,6 @@ nav .links a:not(:last-child) {
     transform: scale(0%);
     height: 100%;
     width: 100%;
-    border: blue 2px solid;
     transition: 0.4s;
 }
 
@@ -312,7 +323,6 @@ nav .links a:not(:last-child) {
     left: 0;
     width: 100%;
     height: 100%;
-    border: red 2px solid;
     transition: 0.4s;
 }
 
