@@ -154,22 +154,25 @@
                 </div>
             </div>
         </section>
-        <section class="contact">
-            <div class="contact-info"></div>
+        <section id="contact">
+            <img id="contact-bg" src="{{ url_for('static', filename='images/wave.svg') }}" alt="">
+            <img id="contact-bg2" src="{{ url_for('static', filename='images/wave3.svg') }}" alt="">
+             <div id="contact-bgcolor"></div>
+            <div id="contact-info"></div>
             <div class="form">
                 <form action="https://usebasin.com/f/52e7368d9d9c" method="POST" enctype="multipart/form-data" id="form" >
-                    <label for="name">Vaše ime</label>
-                    <input type="text" name="name" />
-                    <label for="lastname">Vaše prezime</label>
-                    <input type="text" name="lastname" />
-                    <label for="email">Email</label>
-                    <input type="email" name="email" required />
-                      <label for="phone">Telefon</label>
-                    <input type="text" name="phone" />
-                    <label for="title">Naslov</label>
-                    <input type="text" name="title" />
-                    <label for="message">Poruka</label>
-                    <textarea name="message"></textarea>
+                    <label for="contact-name">Vaše ime</label>
+                    <input type="text" name="name" id="contact-name" />
+                    <label for="contact-lastname">Vaše prezime</label>
+                    <input type="text" name="lastname" id="contact-lastname" />
+                    <label for="contact-email">Email</label>
+                    <input type="email" name="email"  id="contact-email" required />
+                      <label for="contact-phone">Telefon</label>
+                    <input type="text" name="phone"  id="contact-phone" />
+                    <label for="contact-title">Naslov</label>
+                    <input type="text" name="title" id="contact-title" />
+                    <label for="contact-message">Poruka</label>
+                    <textarea name="message" id="contact-message"></textarea>
                     <button type="submit">Send</button>
                   </form>
                   </form>

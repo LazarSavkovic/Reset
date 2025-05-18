@@ -45,7 +45,7 @@ nav .links a {
     padding-right: 25px;
 }
 
-nav .links a:not(:last-child) { 
+nav .links a:not(:last-child) {
     border-right: white solid 2px;
 }
 
@@ -81,7 +81,7 @@ nav .links a:not(:last-child) {
 
 .session-type .session-type-image {
     width: 100%;
-} 
+}
 
 .session-type:hover .session-type-image {
     filter: blur(10px);
@@ -106,7 +106,7 @@ nav .links a:not(:last-child) {
 
 .session-type:hover .session-type-text {
     opacity: 1;
-} 
+}
 
 #individual {
     background-color: #a9bb91;
@@ -317,7 +317,7 @@ nav .links a:not(:last-child) {
 }
 
 .all-prices {
-    
+
     position: absolute;
     top: 0;
     left: 0;
@@ -326,11 +326,107 @@ nav .links a:not(:last-child) {
     transition: 0.4s;
 }
 
+section#contact .form {
+    padding: 200px 0;
 
-section.contact form {
-    color: #5b703c;
-    display: flex;
-    flex-direction: column;
-    
 }
 
+
+section#contact form {
+    color: #f5ffe5;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    height: 80%;
+    margin: auto;
+}
+
+section#contact form input, textarea {
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+}
+
+section#contact form button {
+    background-color: #d7e8be;
+    color: #5b703c;
+    padding: 7px;
+    border: none;
+    margin: 5px;
+    font-size: 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+section#contact form button:hover {
+    transform: scale(102%);
+}
+
+section#contact form button:active {
+    transform: scale(98%);
+}
+
+#contact {
+    height: 140vh;
+    position: relative;
+    color: #f5ffe5;
+}
+
+
+#contact-bg, #contact-bg2 {
+    position: absolute;
+    z-index: -10;
+    width: 125vw;
+}
+
+#contact-bg2 {
+    left: -25vw;
+    top: 0vw;
+}
+
+#contact-bg {
+    left: -35vw;
+    top: -3vw;
+}
+
+#contact-bgcolor {
+    position: absolute;
+    z-index: -11;
+    top: 10vw;
+    left: -25vw;
+    width: 125vw;
+    height: 1500px;
+    background-color: #889b6d;
+}
+
+@media only screen and (max-width: 1024px) {
+    main {
+        width: 70%;
+    }
+  }
+
+
+@media only screen and (max-width: 768px) {
+    main {
+        width: 85%;
+    }
+    #session-types {
+        gap: 15px;
+    }
+    .session-type, .session-type .session-type-text {
+        border-radius: 25px;
+    }
+
+    .therapist-image {
+        border-radius: 30px;
+    }
+
+    .therapist {
+        padding: 20px;
+    }
+    #about-us {
+        padding: 150px 15px;
+    }
+  }
