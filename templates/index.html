@@ -88,8 +88,12 @@
                         <p class="read-more">Saznaj više</p>
                         <div class="prices-text">
                             <div class="prices-description">
-                                <p>Individualna seansa podrazumeva rad jedan na jedan sa terapeutom u sigurnom i poverljivom okruženju. Seansa može biti održana online, putem Google Meet platforme, ili uživo u prostorijama savetovališta. Podaci do kojih psiholog dolazi u radu sa klijentom poverljive su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti. Prilikom korišćenja podataka sakupljenih tokom rada sa klijentom, psiholog je dužan da sakrije identitet stranke i drugih lica na koje se podaci odnose. Psiholog je dužan da ne otkrije identitet klijenta čak i ako klijent ne traži zaštitu svog identiteta.
-                                    Jedna seansa traje 50 minuta do sat vremena, uz mogućnost zakazivanja duple seanse.</p>
+                                <p>Individualna seansa podrazumeva rad jedan na jedan sa terapeutom u sigurnom i poverljivom okruženju. 
+                                    Može biti održana online ili uživo u prostorijama savetovališta. Jedna seansa traje 50 minuta do sat vremena, uz mogućnost zakazivanja duple seanse. 
+                                    Podaci do
+                                      kojih psiholog dolazi u radu sa klijentom poverljive su prirode i čuvanje njihove tajnosti jedna je od
+                                       osnovnih dužnosti.
+                                    </p>
                             </div>
                             <div class="all-prices">
                             <p><span>Online (Srbija):</span>2.500 RSD</p>
@@ -111,8 +115,11 @@
                         <p class="read-more">Saznaj više</p>
                         <div class="prices-text">
                             <div class="prices-description">
-                                <p>Partnerska seansa je namenjena parovima koji žele da rade na svojoj vezi, komunikaciji, razumevanju i rešavanju problema uz pomoć terapeuta. Seanse mogu biti održane online, putem Google Meet platforme, ili uživo u prostorijama savetovališta. Podaci do kojih psiholog dolazi u radu sa klijentima poverljive su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti. Prilikom korišćenja podataka sakupljenih tokom rada sa klijentima, psiholog je dužan da sakrije identitet stranaka i drugih lica na koje se podaci odnose. Psiholog je dužan da ne otkrije identitete klijenata čak i ako klijenti ne traže zaštitu svojih identiteta.
-                                    Jedna seansa traje 50 minuta do sat vremena, uz mogućnost zakazivanja duple seanse.</p>
+                                <p>Partnerska seansa je namenjena parovima koji žele da rade na svojoj vezi, komunikaciji i
+                                     rešavanju problema. Seanse mogu biti održane online
+                                      ili uživo u prostorijama savetovališta. Jedna seansa traje 50 minuta do sat vremena, uz mogućnost
+                                      zakazivanja duple seanse. Podaci do kojih psiholog dolazi u radu sa klijentima poverljive
+                                       su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti. </p>
                             </div>
                             <div class="all-prices">
                             <p><span>Online (Srbija):</span>3.500 RSD</p>
@@ -134,9 +141,13 @@
                         <p class="read-more">Saznaj više</p>
                         <div class="prices-text">
                             <div class="prices-description">
-                                <p>Seanse za adolescente omogućavaju mladima da uz podršku terapeuta pronađu načine da se nose sa izazovima kroz koje prolaze. Individualni rad sa terapeutom može se odvijati online, putem Google Meet platforme ili uživo u prostorijama savetovališta. Podaci do kojih psiholog dolazi u radu sa klijentom poverljive su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti. Prilikom korišćenja podataka sakupljenih tokom rada sa klijentom, psiholog je dužan da sakrije identitet stranke i drugih lica na koje se podaci odnose. Psiholog je dužan da ne otkrije identitet klijenta čak i ako klijent ne traži zaštitu svog identiteta.
-                                    Seanse su dostupne za maloletna lica, pri čemu je za one između 14 i 16 godina neophodan pristanak roditelja. Sa decom mlađom od 14 godina ne radimo.
-                                    Jedna seansa traje 50 minuta do sat vremena, uz mogućnost zakazivanja duple seanse.</p>
+                                <p>Seanse za adolescente omogućavaju mladima da uz podršku terapeuta pronađu načine da se nose sa različitim izazovima.
+                                     Seanse su dostupne za maloletna lica, pri čemu je za one između 14 i 16 godina neophodan pristanak
+                                     roditelja. Sa decom mlađom od 14 godina ne radimo. Individualni rad sa terapeutom može se odvijati online
+                                      ili uživo. Jedna seansa traje 50 minuta do sat vremena. Podaci do kojih psiholog dolazi u radu sa klijentom poverljive
+                                       su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti. 
+                                    
+                                    </p>
                             </div>
                             <div class="all-prices">
                             <p><span>Online (Srbija):</span>2.500 RSD</p>
@@ -236,5 +247,24 @@
 
             
         }
+
+        let showDropdown = false;
+
+        const hamburgerBtn = document.getElementById('hamburger')
+        const dropdownLinks = document.getElementsByClassName('dropdown-links')[0]
+        console.log(dropdownLinks)
+        hamburgerBtn.addEventListener('click', () => {
+            if (showDropdown){
+                dropdownLinks.style.visibility = 'hidden'
+                dropdownLinks.style.opacity = '0'
+                dropdownLinks.style.transform = 'scaleY(50%)'
+                showDropdown = false
+            } else {
+                dropdownLinks.style.visibility = 'visible'
+                dropdownLinks.style.opacity = '1'
+                dropdownLinks.style.transform = 'scaleY(100%)'
+                showDropdown = true
+            } 
+        })
     </script>
 {% endblock %}

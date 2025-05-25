@@ -26,6 +26,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     margin: 0 20%;
+    position: relative;
 }
 
 main {
@@ -37,13 +38,26 @@ nav #logo {
     width: 200px;
 }
 
-nav .links a {
-    color: white;
-    margin-right: 15px;
+nav .links {
+    display: flex;
+
+}
+
+nav .links a, nav .dropdown-links a {
+    margin-left: 15px;
     text-decoration: none;
     font-size: 1.2rem;
-    padding-right: 25px;
+    padding-right: 15px;
 }
+
+nav .links a:last-child {
+    padding-right: 0px;
+  }
+
+nav .links a {
+    color: white;
+}
+
 
 nav .links a:not(:last-child) {
     border-right: white solid 2px;
@@ -401,16 +415,128 @@ section#contact form button:active {
     background-color: #889b6d;
 }
 
+
+.dropdown-links {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background-color:#d7e8be;
+    color: #5b703c;
+    padding: 20px;
+    gap: 10px;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transform: scaleY(50%);
+    transition: 0.3s;
+    flex-direction: column;
+
+}
+
+.dropdown-links a {
+    color: #5b703c;
+}
+
+#hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 1400px) {
+    html {
+        font-size: 96%; 
+      }
+
+     nav .links {
+        display: none;
+    }    
+    #hamburger {
+        display: block;
+    }
+
+    #session-types {
+        gap: 24px;
+    }
+
+    #about-us {
+        padding: 185px 19px;
+    }
+
+    .therapist {
+        padding: 26px;
+    }
+}
+
+@media only screen and (max-width: 1280px) {
+    html {
+        font-size: 94%; 
+      }
+
+      .therapist-text {
+        padding: 20px;
+        border-radius: 40px;
+      }
+
+      #session-types {
+        gap: 22px;
+    }
+
+    #about-us {
+        padding: 180px 18px;
+    }
+
+    .therapist {
+        padding: 24px;
+    }
+}
+
 @media only screen and (max-width: 1024px) {
+    html {
+        font-size: 90%; 
+      }
+
     main {
         width: 70%;
     }
+
+    nav {
+        margin: 0 15%;
+    }
+
+
+      .therapist-text {
+        padding: 15px;
+        border-radius: 30px;
+      }
+
+      .therapist-image {
+        border-radius: 35px;
+    }
+
+    #session-types {
+        gap: 20px;
+    }
+
+    #about-us {
+        padding: 170px 17px;
+    }
+
+    .therapist {
+        padding: 22px;
+    }
+
   }
 
 
 @media only screen and (max-width: 768px) {
     main {
         width: 85%;
+    }
+
+    nav {
+        margin: 0 8%;
     }
     #session-types {
         gap: 15px;
@@ -422,6 +548,11 @@ section#contact form button:active {
     .therapist-image {
         border-radius: 30px;
     }
+
+    .therapist-text {
+        padding: 10px;
+        border-radius: 20px;
+      }
 
     .therapist {
         padding: 20px;
