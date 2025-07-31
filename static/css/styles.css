@@ -171,18 +171,18 @@ nav .links a:not(:last-child) {
 }
 
 
-
 .therapist-text {
     position: absolute;
     background-color: #718653;
     border-radius: 50px;
-    padding: 25px;
+    padding: 9px;
     visibility: hidden;
-    bottom: 0;
-    width: 70%;
+    bottom: -70px;
+    width: 100%;
     transform: scale(45%);
     transition: transform 0.4s;
     text-align: center;
+    z-index: 3;
 }
 
 .therapist:hover .therapist-text {
@@ -193,6 +193,7 @@ nav .links a:not(:last-child) {
 .therapist-text p {
     margin: 0;
 }
+
 
 #about-us-text {
     flex-direction: column;
@@ -464,6 +465,50 @@ section#contact form button:active {
     cursor: pointer;
 }
 
+
+
+/* The dark overlay - hidden by default */
+#screen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+  }
+  
+  /* Reset z-index for all therapists */
+  .therapist {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* When hovering ANY therapist */
+  .therapist:hover {
+    z-index: 11;
+  }
+  
+  /* Show overlay when any therapist is hovered */
+  .therapist:hover ~ #screen-overlay {
+    opacity: 1;
+  }  
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media only screen and (max-width: 1400px) {
     html {
         font-size: 96%;
@@ -495,10 +540,10 @@ section#contact form button:active {
         font-size: 94%;
     }
 
-    .therapist-text {
-        padding: 20px;
+      .therapist-text {
+        padding: 7px;
         border-radius: 40px;
-    }
+      }
 
     #session-types {
         gap: 22px;
@@ -551,7 +596,7 @@ section#contact form button:active {
     }
 
     .therapist {
-        padding: 13px;
+        padding: 8px;
     }
 
     #about-us-bgcolor {
@@ -610,7 +655,7 @@ section#contact form button:active {
     }
 
     .therapist {
-        padding: 10px;
+        padding: 4px;
     }
 
     #about-us {
