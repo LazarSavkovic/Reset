@@ -1,15 +1,24 @@
 * {
     box-sizing: border-box;
 }
+/* 
+* {
+    outline: 1px solid red;
+} */
+
+html {
+     overflow-x: hidden;
+}
 
 body {
     background-color: #889b6d;
-    font-family:  "Fraunces", serif;
+    font-family: "Fraunces", serif;
     color: white;
     letter-spacing: 0.15rem;
     width: 100vw;
     min-height: 100vh;
     overflow-x: hidden;
+    margin: 0;
 }
 
 h1 {
@@ -43,7 +52,8 @@ nav .links {
 
 }
 
-nav .links a, nav .dropdown-links a {
+nav .links a,
+nav .dropdown-links a {
     margin-left: 15px;
     text-decoration: none;
     font-size: 1.2rem;
@@ -52,7 +62,7 @@ nav .links a, nav .dropdown-links a {
 
 nav .links a:last-child {
     padding-right: 0px;
-  }
+}
 
 nav .links a {
     color: white;
@@ -75,6 +85,9 @@ nav .links a:not(:last-child) {
 }
 
 #sessions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 100px 0;
 }
 
@@ -143,7 +156,8 @@ nav .links a:not(:last-child) {
     justify-content: space-between;
 }
 
-.therapist, #about-us-text {
+.therapist,
+#about-us-text {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -188,21 +202,24 @@ nav .links a:not(:last-child) {
     cursor: pointer;
 }
 
-#about-us-text:hover h1{
+#about-us-text:hover h1 {
     transition: 0.4s;
     transform: scale(125%);
 
 }
+
 #about-us-content {
     opacity: 0;
     display: none;
     transition: opacity 0.4s;
 }
+
 #about-us-text p {
     font-size: 1.2rem;
 }
 
-#about-us-bg, #about-us-bg2 {
+#about-us-bg,
+#about-us-bg2 {
     position: absolute;
     z-index: -10;
     width: 125vw;
@@ -222,10 +239,10 @@ nav .links a:not(:last-child) {
 #about-us-bgcolor {
     position: absolute;
     z-index: -11;
-    top: 30vw;
+    top: 20vw;
     left: -25vw;
     width: 125vw;
-    height: 80vw;
+    height: 100vw;
     background-color: #d7e8be;
 }
 
@@ -243,7 +260,8 @@ nav .links a:not(:last-child) {
 }
 
 
-#prices-bg, #prices-bg2 {
+#prices-bg,
+#prices-bg2 {
     position: absolute;
     z-index: -10;
     width: 125vw;
@@ -355,7 +373,8 @@ section#contact form {
     margin: auto;
 }
 
-section#contact form input, textarea {
+section#contact form input,
+textarea {
     border: none;
     border-radius: 5px;
     margin: 5px;
@@ -383,13 +402,14 @@ section#contact form button:active {
 }
 
 #contact {
-    height: 140vh;
+    height: 70vh;
     position: relative;
     color: #f5ffe5;
 }
 
 
-#contact-bg, #contact-bg2 {
+#contact-bg,
+#contact-bg2 {
     position: absolute;
     z-index: -10;
     width: 125vw;
@@ -411,7 +431,7 @@ section#contact form button:active {
     top: 10vw;
     left: -25vw;
     width: 125vw;
-    height: 1500px;
+    height: 500px;
     background-color: #889b6d;
 }
 
@@ -420,7 +440,7 @@ section#contact form button:active {
     position: absolute;
     right: 0;
     top: 100%;
-    background-color:#d7e8be;
+    background-color: #d7e8be;
     color: #5b703c;
     padding: 20px;
     gap: 10px;
@@ -446,12 +466,13 @@ section#contact form button:active {
 
 @media only screen and (max-width: 1400px) {
     html {
-        font-size: 96%; 
-      }
+        font-size: 96%;
+    }
 
-     nav .links {
+    nav .links {
         display: none;
-    }    
+    }
+
     #hamburger {
         display: block;
     }
@@ -465,21 +486,21 @@ section#contact form button:active {
     }
 
     .therapist {
-        padding: 26px;
+        padding: 20px;
     }
 }
 
 @media only screen and (max-width: 1280px) {
     html {
-        font-size: 94%; 
-      }
+        font-size: 94%;
+    }
 
-      .therapist-text {
+    .therapist-text {
         padding: 20px;
         border-radius: 40px;
-      }
+    }
 
-      #session-types {
+    #session-types {
         gap: 22px;
     }
 
@@ -488,14 +509,18 @@ section#contact form button:active {
     }
 
     .therapist {
-        padding: 24px;
+        padding: 17px;
+    }
+
+    #about-us-bgcolor {
+        height: 120vw;
     }
 }
 
 @media only screen and (max-width: 1024px) {
     html {
-        font-size: 90%; 
-      }
+        font-size: 90%;
+    }
 
     main {
         width: 70%;
@@ -506,17 +531,19 @@ section#contact form button:active {
     }
 
 
-      .therapist-text {
+    .therapist-text {
         padding: 15px;
         border-radius: 30px;
-      }
+    }
 
-      .therapist-image {
+    .therapist-image {
         border-radius: 35px;
     }
 
     #session-types {
         gap: 20px;
+        flex-direction: column;
+        width: 60%;
     }
 
     #about-us {
@@ -524,10 +551,34 @@ section#contact form button:active {
     }
 
     .therapist {
-        padding: 22px;
+        padding: 13px;
     }
 
-  }
+    #about-us-bgcolor {
+        height: 140vw;
+    }
+
+        #prices-bgcolor {
+        height: 1800px;
+    }
+
+    .prices-single {
+        flex-direction: column;
+    }
+
+    .prices-text-content {
+        height: 50vw;
+    }
+
+    #prices-couple {
+        flex-direction: column;
+    }
+
+    .prices-img {
+        display: none;
+    }
+
+}
 
 
 @media only screen and (max-width: 768px) {
@@ -538,10 +589,14 @@ section#contact form button:active {
     nav {
         margin: 0 8%;
     }
+
     #session-types {
         gap: 15px;
+        width: 70%;
     }
-    .session-type, .session-type .session-type-text {
+
+    .session-type,
+    .session-type .session-type-text {
         border-radius: 25px;
     }
 
@@ -552,12 +607,22 @@ section#contact form button:active {
     .therapist-text {
         padding: 10px;
         border-radius: 20px;
-      }
+    }
 
     .therapist {
-        padding: 20px;
+        padding: 10px;
     }
+
     #about-us {
         padding: 150px 15px;
     }
-  }
+
+    #sessions-titles h1 {
+        margin: 0 0;
+    }
+
+
+    #sessions-titles h2 {
+        margin-top: 40px;
+    }
+}
