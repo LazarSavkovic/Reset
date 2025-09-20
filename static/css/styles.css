@@ -1,687 +1,335 @@
-* {
-    box-sizing: border-box;
-}
-/* 
-* {
-    outline: 1px solid red;
-} */
+/* =============== Reset & Base =============== */
+* { box-sizing: border-box; }
+/* * { outline: 1px solid red; } */
 
 html {
-     overflow-x: hidden;
+  overflow-x: hidden;
+  scrollbar-gutter: stable both-edges;
 }
 
 body {
-    background-color: #889b6d;
-    font-family: "Fraunces", serif;
-    color: white;
-    letter-spacing: 0.15rem;
-    width: 100vw;
-    min-height: 100vh;
-    overflow-x: hidden;
-    margin: 0;
+  margin: 0;
+  min-height: 100vh;
+  background: #889b6d; /* general fallback */
+  font-family: "Fraunces", serif;
+  color: #fff;
+  letter-spacing: 0.15rem;
 }
 
-h1 {
-    font-size: 2rem;
+/* Typography */
+h1 { font-size: 2rem; margin: 0 0 0.6rem; }
+h2 { font-size: 1.8rem; margin: 0.2rem 0 0.6rem; }
+
+/* =============== Layout Helpers =============== */
+/* Full-bleed section with its own background color */
+.section {
+  position: relative;
+  width: 100%;
+  overflow: visible;
 }
 
-h2 {
-    font-size: 1.8rem;
+/* Narrow, centered content wrapper */
+.container {
+  width: min(1200px, 60%);
+  margin: 0 auto;
 }
 
+/* Full-bleed waves that visually separate sections */
+.wave {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: auto;
+  pointer-events: none;
+  z-index: 0;
+}
+.wave--top { top: -1px; }
+.wave--bottom { bottom: -1px; }
+
+/* Ensure content sits above the waves */
+.section > *:not(.wave) { position: relative; z-index: 1; }
+
+/* Colors per section */
+.section--sessions { background: #889b6d; }
+.section--about    { background: #d7e8be; }
+.section--prices   { background: #f5ffe5; }
+.section--contact  { background: #889b6d; }
+
+/* =============== Navigation =============== */
 nav {
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 0 20%;
-    position: relative;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 20%;
+  position: relative;
 }
 
-main {
-    width: 60%;
-    margin: auto;
-}
+nav #logo { width: 200px; }
 
-nav #logo {
-    width: 200px;
-}
-
-nav .links {
-    display: flex;
-
-}
+nav .links { display: flex; }
 
 nav .links a,
 nav .dropdown-links a {
-    margin-left: 15px;
-    text-decoration: none;
-    font-size: 1.2rem;
-    padding-right: 15px;
+  margin-left: 15px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding-right: 15px;
+  color: #fff;
+}
+nav .links a:last-child { padding-right: 0; }
+nav .links a:not(:last-child) { border-right: 2px solid #fff; }
+
+#hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-nav .links a:last-child {
-    padding-right: 0px;
+.dropdown-links {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: #d7e8be;
+  color: #5b703c;
+  padding: 20px;
+  gap: 10px;
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transform: scaleY(50%);
+  transition: 0.3s;
+  flex-direction: column;
 }
+.dropdown-links a { color: #5b703c; }
 
-nav .links a {
-    color: white;
-}
-
-
-nav .links a:not(:last-child) {
-    border-right: white solid 2px;
+/* =============== Sessions =============== */
+#sessions .container {
+  padding: 100px 0 80px;
 }
 
 #sessions-titles h1 {
-    font-size: 2.3rem;
-    text-align: center;
+  font-size: 2.3rem;
+  text-align: center;
 }
-
 #sessions-titles h2 {
-    margin-top: 70px;
-    text-align: center;
-    font-size: 2rem;
-}
-
-#sessions {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 100px 0;
+  margin-top: 30px;
+  text-align: center;
+  font-size: 2rem;
 }
 
 #session-types {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 55px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 55px;
 }
 
 .session-type {
-    flex: 1;
-    position: relative;
-    border-radius: 50px;
-    cursor: pointer;
+  flex: 1;
+  position: relative;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
 }
-
-.session-type .session-type-image {
-    width: 100%;
-}
-
-.session-type:hover .session-type-image {
-    filter: blur(10px);
-}
+.session-type .session-type-image { width: 100%; display: block; }
+.session-type:hover .session-type-image { filter: blur(10px); }
 
 .session-type .session-type-text {
-    opacity: 0;
-    transition: 0.5s;
-    color: rgb(255, 252, 247);
-    background-color: rgba(0, 0, 0, 0.4);
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    display: flex;
-    border-radius: 50px;
+  opacity: 0;
+  transition: 0.5s;
+  color: #fff;
+  background: rgba(0,0,0,0.4);
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+}
+.session-type:hover .session-type-text { opacity: 1; }
+
+#individual  { background: #a9bb91; }
+#couples     { background: #718653; }
+#adolescents { background: #5b703c; }
+
+/* =============== About Us Grid =============== */
+#about-us .container {
+  padding: 150px 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2%;
 }
 
-.session-type:hover .session-type-text {
-    opacity: 1;
+#about-us-text,
+.therapist {
+  width: 49%;
+  aspect-ratio: 1 / 1;
+  padding: 55px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  transition: 0.4s;
+  cursor: pointer;
 }
-
-#individual {
-    background-color: #a9bb91;
-}
-
-#couples {
-    background-color: #718653;
-}
-
-#adolescents {
-    background-color: #5b703c;
-}
-
-#about-us {
-    position: relative;
-    aspect-ratio: 1 / 1;
-    display: flex;
-    flex-wrap: wrap;
-    padding: 150px 100px;
-    justify-content: space-between;
-}
-
-.therapist,
-#about-us-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 49%;
-    aspect-ratio: 1 / 1;
-    padding: 55px;
-    transition: 0.4s;
-    position: relative;
-    cursor: pointer;
-}
-
-#about-us-text h1 {
-    margin: 0;
-}
-
-
-.therapist-text {
-    position: absolute;
-    background-color: #718653;
-    border-radius: 50px;
-    padding: 9px;
-    visibility: hidden;
-    bottom: -70px;
-    width: 100%;
-    transform: scale(45%);
-    transition: transform 0.4s;
-    text-align: center;
-    z-index: 15 !important;
-}
-
-.therapist:hover .therapist-text {
-    transform: none;
-    visibility: visible;
-}
-
-.therapist-text p {
-    margin: 0;
-}
-
 
 #about-us-text {
-    flex-direction: column;
-    background-color: #718653;
-    border-radius: 70px 0 70px 0;
-    aspect-ratio: 1 / 1;
-    cursor: pointer;
+  flex-direction: column;
+  background: #718653;
+  border-radius: 70px 0 70px 0;
 }
+#about-us-text h1 { margin: 0; }
+#about-us-text:hover h1 { transform: scale(1.25); transition: 0.4s; }
 
-#about-us-text:hover h1 {
-    transition: 0.4s;
-    transform: scale(125%);
-
-}
-
-#about-us-content {
-    opacity: 0;
-    display: none;
-    transition: opacity 0.4s;
-}
-
-#about-us-text p {
-    font-size: 1.2rem;
-}
-
-#about-us-bg,
-#about-us-bg2 {
-    position: absolute;
-    z-index: -10;
-    width: 125vw;
-}
-
-#about-us-bg {
-    left: -25vw;
-    top: 0vw;
-}
-
-#about-us-bg2 {
-    left: -35vw;
-    top: -3vw;
-}
-
-
-#about-us-bgcolor {
-    position: absolute;
-    z-index: -11;
-    top: 20vw;
-    left: -25vw;
-    width: 125vw;
-    height: 100vw;
-    background-color: #d7e8be;
-}
+#about-us-content { opacity: 0; display: none; transition: opacity 0.4s; }
+#about-us-text p { font-size: 1.2rem; }
 
 .therapist-image {
-    width: 100%;
-    height: 100%;
-    border-radius: 70px;
-    object-fit: cover;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  border-radius: 70px;
 }
 
-
-#prices {
-    height: 140vh;
-    position: relative;
+.therapist-text {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) scale(0.45);
+  bottom: -70px;
+  width: 90%;
+  background: #718653;
+  border-radius: 50px;
+  padding: 9px;
+  text-align: center;
+  visibility: hidden;
+  transition: transform 0.4s;
+  z-index: 15;
 }
+.therapist-text p { margin: 0; }
+.therapist:hover .therapist-text { transform: translateX(-50%) scale(1); visibility: visible; }
 
-
-#prices-bg,
-#prices-bg2 {
-    position: absolute;
-    z-index: -10;
-    width: 125vw;
+/* Dim overlay and stacking fix */
+#screen-overlay {
+  position: fixed; inset: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.5);
+  opacity: 0; pointer-events: none;
+  z-index: 10; transition: opacity .3s ease; will-change: opacity;
 }
+.therapist { position: relative; }
+.therapist:hover { z-index: 1000; }
+#about-us .container:has(.therapist:hover) ~ #screen-overlay,
+.therapist:hover ~ #screen-overlay { opacity: 1; }
 
-#prices-bg2 {
-    left: -25vw;
-    top: 0vw;
-}
-
-#prices-bg {
-    left: -35vw;
-    top: -3vw;
-}
-
-#prices-bgcolor {
-    position: absolute;
-    z-index: -11;
-    top: 10vw;
-    left: -25vw;
-    width: 125vw;
-    height: 1500px;
-    background-color: #f5ffe5;
+/* =============== Prices =============== */
+#prices .container {
+  padding: 100px 0;
 }
 
 .prices-content {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .prices-single {
-    height: 33%;
-    display: flex;
-    gap: 9px;
+  display: flex;
+  gap: 9px;
+  min-height: 22rem;
 }
 
-#prices-couple {
-    flex-direction: row-reverse;
-}
+#prices-couple { flex-direction: row-reverse; }
 
 .prices-text-content {
-    flex: 1;
-    background-color: #889b6d;
-    padding: 25px;
-    border-radius: 35px;
+  flex: 1;
+  background: #889b6d;
+  padding: 25px;
+  border-radius: 35px;
 }
 
-.prices-img {
-    flex: 1;
-    height: 100%;
-    transition: 0.3s;
-}
-
-.prices-text-content p {
-    margin: 8px;
-}
-
-.prices-img img {
-    width: 100%;
-    height: 100%;
-    border-radius: 35px;
-}
+.prices-img { flex: 1; transition: 0.3s; }
+.prices-img img { width: 100%; height: 100%; border-radius: 35px; object-fit: cover; }
 
 .read-more {
-    cursor: pointer;
-    font-weight: 800;
-    text-decoration: underline;
+  cursor: pointer;
+  font-weight: 800;
+  text-decoration: underline;
 }
 
-.prices-text {
-    position: relative;
-    height: 100%;
-}
-
-.prices-description {
-    top: 0;
-    left: 0;
-    position: absolute;
-    transform: scale(0%);
-    height: 100%;
-    width: 100%;
-    transition: 0.4s;
-}
-
+.prices-text { position: relative; height: 100%; }
+.prices-description,
 .all-prices {
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transition: 0.4s;
+  position: absolute; inset: 0;
+  transition: 0.4s; transform-origin: top left;
 }
+.prices-description { transform: scale(0%); }
+.all-prices { transform: scale(100%); }
 
-section#contact .form {
-    padding: 200px 0;
-
+/* =============== Contact =============== */
+#contact .container {
+  padding: 100px 0 140px;
 }
-
 
 section#contact form {
-    color: #f5ffe5;
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    height: 80%;
-    margin: auto;
+  color: #f5ffe5;
+  display: flex; flex-direction: column;
+  margin: 0 auto;
+  max-width: 640px;
 }
 
 section#contact form input,
-textarea {
-    border: none;
-    border-radius: 5px;
-    margin: 5px;
-    padding: 5px;
+section#contact form textarea {
+  border: none; border-radius: 5px;
+  margin: 5px; padding: 8px;
 }
 
 section#contact form button {
-    background-color: #d7e8be;
-    color: #5b703c;
-    padding: 7px;
-    border: none;
-    margin: 5px;
-    font-size: 1.2rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s;
+  background: #d7e8be; color: #5b703c;
+  padding: 10px 12px; border: none; margin: 5px;
+  font-size: 1.1rem; border-radius: 6px;
+  cursor: pointer; transition: 0.2s;
+}
+section#contact form button:hover { transform: scale(1.02); }
+section#contact form button:active { transform: scale(0.98); }
+
+/* =============== Media Queries =============== */
+@media (max-width: 1400px) {
+  html { font-size: 96%; }
+  nav .links { display: none; }
+  #hamburger { display: block; }
+  .container { width: min(1200px, 70%); }
 }
 
-section#contact form button:hover {
-    transform: scale(102%);
-}
+@media (max-width: 1024px) {
+  html { font-size: 90%; }
+  .container { width: min(100%, 85%); }
 
-section#contact form button:active {
-    transform: scale(98%);
-}
-
-#contact {
-    height: 70vh;
-    position: relative;
-    color: #f5ffe5;
-}
-
-
-#contact-bg,
-#contact-bg2 {
-    position: absolute;
-    z-index: -10;
-    width: 125vw;
-}
-
-#contact-bg2 {
-    left: -25vw;
-    top: 0vw;
-}
-
-#contact-bg {
-    left: -35vw;
-    top: -3vw;
-}
-
-#contact-bgcolor {
-    position: absolute;
-    z-index: -11;
-    top: 10vw;
-    left: -25vw;
-    width: 125vw;
-    height: 500px;
-    background-color: #889b6d;
-}
-
-
-.dropdown-links {
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background-color: #d7e8be;
-    color: #5b703c;
-    padding: 20px;
-    gap: 10px;
-    display: flex;
-    visibility: hidden;
-    opacity: 0;
-    transform: scaleY(50%);
-    transition: 0.3s;
-    flex-direction: column;
-
-}
-
-.dropdown-links a {
-    color: #5b703c;
-}
-
-#hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-
-
-/* The dark overlay - hidden by default */
-#screen-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    pointer-events: none;
-    z-index: 10;
-    transition: opacity 0.3s ease;
+  #session-types {
+    gap: 20px; flex-direction: column; width: 60%; margin-inline: auto;
   }
-  
-  /* Reset z-index for all therapists */
-  .therapist {
-    position: relative;
+
+  #about-us .container {
+    padding: 120px 0;
+    gap: 16px;
   }
-  
-  /* When hovering ANY therapist */
-  .therapist:hover {
-    z-index: 1000;
+  #about-us-text, .therapist {
+    width: 100%; aspect-ratio: 1 / 1; padding: 24px;
   }
-  
-  /* Show overlay when any therapist is hovered */
-  .therapist:hover ~ #screen-overlay {
-    opacity: 1;
-  }  
+  .therapist-image { border-radius: 35px; }
+  .therapist-text { border-radius: 30px; }
 
-
-
-
-
-
-
-
-
-
-
-
-
-@media only screen and (max-width: 1400px) {
-    html {
-        font-size: 96%;
-    }
-
-    nav .links {
-        display: none;
-    }
-
-    #hamburger {
-        display: block;
-    }
-
-    #session-types {
-        gap: 24px;
-    }
-
-    #about-us {
-        padding: 185px 19px;
-    }
-
-    .therapist {
-        padding: 20px;
-    }
+  .prices-single { flex-direction: column; }
+  .prices-text-content { min-height: 16rem; }
+  .prices-img { display: none; }
 }
 
-@media only screen and (max-width: 1280px) {
-    html {
-        font-size: 94%;
-    }
+@media (max-width: 768px) {
+  .container { width: min(100%, 90%); }
+  #sessions .container { padding: 80px 0 60px; }
 
-      .therapist-text {
-        padding: 7px;
-        border-radius: 40px;
-      }
+  .session-type,
+  .session-type .session-type-text { border-radius: 25px; }
 
-    #session-types {
-        gap: 22px;
-    }
-
-    #about-us {
-        padding: 180px 18px;
-    }
-
-    .therapist {
-        padding: 17px;
-    }
-
-    #about-us-bgcolor {
-        height: 120vw;
-    }
-
-    #about-us-text {
-        padding: 35px;
-    }
-}
-
-@media only screen and (max-width: 1024px) {
-    html {
-        font-size: 90%;
-    }
-
-    main {
-        width: 70%;
-    }
-
-    nav {
-        margin: 0 15%;
-    }
-
-
-    .therapist-text {
-        padding: 15px;
-        border-radius: 30px;
-    }
-
-    .therapist-image {
-        border-radius: 35px;
-    }
-
-    #session-types {
-        gap: 20px;
-        flex-direction: column;
-        width: 60%;
-    }
-
-    #about-us {
-        padding: 170px 17px;
-    }
-
-    .therapist {
-        padding: 8px;
-    }
-
-    #about-us-bgcolor {
-        height: 140vw;
-    }
-
-        #prices-bgcolor {
-        height: 1800px;
-    }
-
-    .prices-single {
-        flex-direction: column;
-    }
-
-    .prices-text-content {
-        height: 50vw;
-    }
-
-    #prices-couple {
-        flex-direction: column;
-    }
-
-    .prices-img {
-        display: none;
-    }
-
-    #about-us-text {
-        padding: 25px;
-    }
-
-}
-
-
-@media only screen and (max-width: 768px) {
-    main {
-        width: 85%;
-    }
-
-    nav {
-        margin: 0 8%;
-    }
-
-    #session-types {
-        gap: 15px;
-        width: 70%;
-    }
-
-    .session-type,
-    .session-type .session-type-text {
-        border-radius: 25px;
-    }
-
-    .therapist-image {
-        border-radius: 30px;
-    }
-
-    .therapist-text {
-        padding: 10px;
-        border-radius: 20px;
-    }
-
-    .therapist {
-        padding: 4px;
-    }
-
-    #about-us {
-        padding: 150px 15px;
-    }
-
-    #about-us-text {
-        padding: 15px;
-    }
-
-    #sessions-titles h1 {
-        margin: 0 0;
-    }
-
-
-    #sessions-titles h2 {
-        margin-top: 40px;
-    }
+  #about-us .container { padding: 100px 0; }
+  #about-us-text { padding: 16px; }
 }
