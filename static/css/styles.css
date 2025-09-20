@@ -1,4 +1,4 @@
-/* =============== Reset & Base =============== */
+/* ===================== Reset & Base ===================== */
 * { box-sizing: border-box; }
 /* * { outline: 1px solid red; } */
 
@@ -10,53 +10,44 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: #889b6d; /* general fallback */
+  background: #889b6d; /* page fallback */
   font-family: "Fraunces", serif;
   color: #fff;
   letter-spacing: 0.15rem;
 }
 
-/* Typography */
-h1 { font-size: 2rem; margin: 0 0 0.6rem; }
-h2 { font-size: 1.8rem; margin: 0.2rem 0 0.6rem; }
+h1 { font-size: 2rem; margin: 0 0 .6rem; }
+h2 { font-size: 1.8rem; margin: .2rem 0 .6rem; }
 
-/* =============== Layout Helpers =============== */
-/* Full-bleed section with its own background color */
-.section {
-  position: relative;
-  width: 100%;
-  overflow: visible;
-}
+/* ===================== Layout Helpers ===================== */
+.section { position: relative; width: 100%; overflow: visible; }
 
-/* Narrow, centered content wrapper */
 .container {
   width: min(1200px, 60%);
   margin: 0 auto;
 }
 
-/* Full-bleed waves that visually separate sections */
-.wave {
-  position: absolute;
+/* full-bleed wave separators; set --top/--bottom inline */
+.wave-sep {
+  display: block;
+  position: relative;
   left: 50%;
   transform: translateX(-50%);
   width: 100vw;
-  height: auto;
-  pointer-events: none;
-  z-index: 0;
+  height: 180px;
+  line-height: 0;
+  --top: #889b6d;
+  --bottom: #d7e8be;
 }
-.wave--top { top: -1px; }
-.wave--bottom { bottom: -1px; }
+.wave-sep svg { display: block; width: 100%; height: 100%; }
 
-/* Ensure content sits above the waves */
-.section > *:not(.wave) { position: relative; z-index: 1; }
-
-/* Colors per section */
+/* Section background colors */
 .section--sessions { background: #889b6d; }
 .section--about    { background: #d7e8be; }
 .section--prices   { background: #f5ffe5; }
 .section--contact  { background: #889b6d; }
 
-/* =============== Navigation =============== */
+/* ===================== Navigation ===================== */
 nav {
   padding: 10px;
   display: flex;
@@ -64,10 +55,10 @@ nav {
   justify-content: space-between;
   margin: 0 20%;
   position: relative;
+  z-index: 3000;
 }
 
 nav #logo { width: 200px; }
-
 nav .links { display: flex; }
 
 nav .links a,
@@ -76,49 +67,31 @@ nav .dropdown-links a {
   text-decoration: none;
   font-size: 1.2rem;
   padding-right: 15px;
-  color: #fff;
+  color: white;
 }
 nav .links a:last-child { padding-right: 0; }
-nav .links a:not(:last-child) { border-right: 2px solid #fff; }
+nav .links a:not(:last-child) { border-right: 2px solid white; }
 
-#hamburger {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
+#hamburger { display: none; background: none; border: none; cursor: pointer; color: #fff; }
 
 .dropdown-links {
   position: absolute;
-  right: 0;
-  top: 100%;
-  background: #d7e8be;
-  color: #5b703c;
-  padding: 20px;
-  gap: 10px;
-  display: flex;
-  visibility: hidden;
-  opacity: 0;
-  transform: scaleY(50%);
-  transition: 0.3s;
-  flex-direction: column;
+  right: 0; top: 100%;
+  background: #d7e8be; color: #5b703c;
+  padding: 20px; gap: 10px;
+  display: flex; flex-direction: column;
+  visibility: hidden; opacity: 0; transform: scaleY(50%);
+  transform-origin: top;
+  transition: .3s;
 }
 .dropdown-links a { color: #5b703c; }
+nav.is-open .dropdown-links { visibility: visible; opacity: 1; transform: scaleY(100%); }
 
-/* =============== Sessions =============== */
-#sessions .container {
-  padding: 100px 0 80px;
-}
+/* ===================== Sessions ===================== */
+#sessions .container { padding: 100px 0 80px; }
 
-#sessions-titles h1 {
-  font-size: 2.3rem;
-  text-align: center;
-}
-#sessions-titles h2 {
-  margin-top: 30px;
-  text-align: center;
-  font-size: 2rem;
-}
+#sessions-titles h1 { font-size: 2.3rem; text-align: center; }
+#sessions-titles h2 { margin-top: 30px; text-align: center; font-size: 2rem; }
 
 #session-types {
   margin-top: 40px;
@@ -140,11 +113,10 @@ nav .links a:not(:last-child) { border-right: 2px solid #fff; }
 
 .session-type .session-type-text {
   opacity: 0;
-  transition: 0.5s;
+  transition: .5s;
   color: #fff;
-  background: rgba(0,0,0,0.4);
-  position: absolute;
-  inset: 0;
+  background: rgba(0,0,0,.4);
+  position: absolute; inset: 0;
   border-radius: 50px;
   display: flex; align-items: center; justify-content: center; flex-direction: column;
 }
@@ -154,36 +126,38 @@ nav .links a:not(:last-child) { border-right: 2px solid #fff; }
 #couples     { background: #718653; }
 #adolescents { background: #5b703c; }
 
-/* =============== About Us Grid =============== */
-#about-us .container {
-  padding: 150px 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 2%;
+/* ===================== ABOUT (no overlay; tooltip on hover) ===================== */
+#about-us .container { position: relative; overflow: visible; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding: 120px 0;
+  overflow: visible; /* allow tooltips to escape */
 }
 
-#about-us-text,
-.therapist {
-  width: 49%;
-  aspect-ratio: 1 / 1;
-  padding: 55px;
-  display: flex; align-items: center; justify-content: center;
-  position: relative;
-  transition: 0.4s;
-  cursor: pointer;
-}
-
-#about-us-text {
-  flex-direction: column;
+/* “O nama” tile (acts as popup trigger) */
+.about-card {
+  display: grid;
+  place-items: center;
   background: #718653;
+  color: #fff;
   border-radius: 70px 0 70px 0;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  transition: transform .2s ease;
 }
-#about-us-text h1 { margin: 0; }
-#about-us-text:hover h1 { transform: scale(1.25); transition: 0.4s; }
+.about-card:hover { transform: scale(1.02); }
+.about-card h1 { margin: 0; }
 
-#about-us-content { opacity: 0; display: none; transition: opacity 0.4s; }
-#about-us-text p { font-size: 1.2rem; }
+/* Therapist tiles */
+.therapist {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  z-index: 1;                 /* base */
+}
+.therapist:hover { z-index: 1000; } /* bring above neighbors */
 
 .therapist-image {
   width: 100%; height: 100%;
@@ -191,53 +165,70 @@ nav .links a:not(:last-child) { border-right: 2px solid #fff; }
   border-radius: 70px;
 }
 
+/* Tooltip */
 .therapist-text {
   position: absolute;
   left: 50%;
-  transform: translateX(-50%) scale(0.45);
   bottom: -70px;
   width: 90%;
+  transform: translateX(-50%) scale(.45);
   background: #718653;
+  color: #fff;
   border-radius: 50px;
   padding: 9px;
   text-align: center;
   visibility: hidden;
-  transition: transform 0.4s;
-  z-index: 15;
+  transition: transform .25s ease;
+  z-index: 1001;              /* above hovered tile */
+}
+.therapist:hover .therapist-text {
+  visibility: visible;
+  transform: translateX(-50%) scale(1);
 }
 .therapist-text p { margin: 0; }
-.therapist:hover .therapist-text { transform: translateX(-50%) scale(1); visibility: visible; }
 
-/* Dim overlay and stacking fix */
-#screen-overlay {
-  position: fixed; inset: 0;
-  width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.5);
-  opacity: 0; pointer-events: none;
-  z-index: 10; transition: opacity .3s ease; will-change: opacity;
+/* ===== O nama popup (no dark overlay) ===== */
+.about-popup {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;    /* allow clicks to pass when closed */
+  z-index: 5000;
 }
-.therapist { position: relative; }
-.therapist:hover { z-index: 1000; }
-#about-us .container:has(.therapist:hover) ~ #screen-overlay,
-.therapist:hover ~ #screen-overlay { opacity: 1; }
+.about-popup.is-open { pointer-events: auto; }
 
-/* =============== Prices =============== */
-#prices .container {
-  padding: 100px 0;
+.about-popup__panel {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
+  width: min(1200px, 70vw);
+  max-height: 85vh;
+  overflow: auto;
+  background: #718653;
+  color: #fff;
+  border-radius: 28px;
+  padding: clamp(16px, 3vw, 48px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  opacity: 0;
+  transition: opacity .25s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.about-popup.is-open .about-popup__panel {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
-.prices-content {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.about-popup__close {
+  position: sticky; top: 0; margin-left: auto;
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 0; background: rgba(255,255,255,.15); color: #fff;
+  font-size: 22px; cursor: pointer; display: grid; place-items: center;
 }
 
-.prices-single {
-  display: flex;
-  gap: 9px;
-  min-height: 22rem;
-}
+/* ===================== Prices ===================== */
+#prices .container { padding: 100px 0; }
+.prices-content { display: flex; flex-direction: column; gap: 12px; }
 
+.prices-single { display: flex; gap: 9px; min-height: 22rem; }
 #prices-couple { flex-direction: row-reverse; }
 
 .prices-text-content {
@@ -246,53 +237,40 @@ nav .links a:not(:last-child) { border-right: 2px solid #fff; }
   padding: 25px;
   border-radius: 35px;
 }
-
-.prices-img { flex: 1; transition: 0.3s; }
+.prices-img { flex: 1; transition: .3s; }
 .prices-img img { width: 100%; height: 100%; border-radius: 35px; object-fit: cover; }
 
-.read-more {
-  cursor: pointer;
-  font-weight: 800;
-  text-decoration: underline;
-}
+.read-more { cursor: pointer; font-weight: 800; text-decoration: underline; }
 
 .prices-text { position: relative; height: 100%; }
-.prices-description,
-.all-prices {
+.prices-description, .all-prices {
   position: absolute; inset: 0;
-  transition: 0.4s; transform-origin: top left;
+  transition: .4s; transform-origin: top left;
 }
 .prices-description { transform: scale(0%); }
-.all-prices { transform: scale(100%); }
+.all-prices        { transform: scale(100%); }
 
-/* =============== Contact =============== */
-#contact .container {
-  padding: 100px 0 140px;
-}
+/* ===================== Contact ===================== */
+#contact .container { padding: 100px 0 140px; }
 
 section#contact form {
   color: #f5ffe5;
   display: flex; flex-direction: column;
-  margin: 0 auto;
-  max-width: 640px;
+  margin: 0 auto; max-width: 640px;
 }
-
 section#contact form input,
 section#contact form textarea {
-  border: none; border-radius: 5px;
-  margin: 5px; padding: 8px;
+  border: none; border-radius: 5px; margin: 5px; padding: 8px;
 }
-
 section#contact form button {
   background: #d7e8be; color: #5b703c;
   padding: 10px 12px; border: none; margin: 5px;
-  font-size: 1.1rem; border-radius: 6px;
-  cursor: pointer; transition: 0.2s;
+  font-size: 1.1rem; border-radius: 6px; cursor: pointer; transition: .2s;
 }
 section#contact form button:hover { transform: scale(1.02); }
 section#contact form button:active { transform: scale(0.98); }
 
-/* =============== Media Queries =============== */
+/* ===================== Media Queries ===================== */
 @media (max-width: 1400px) {
   html { font-size: 96%; }
   nav .links { display: none; }
@@ -304,32 +282,32 @@ section#contact form button:active { transform: scale(0.98); }
   html { font-size: 90%; }
   .container { width: min(100%, 85%); }
 
-  #session-types {
-    gap: 20px; flex-direction: column; width: 60%; margin-inline: auto;
-  }
+  #session-types { gap: 20px; flex-direction: column; width: 60%; margin-inline: auto; }
 
-  #about-us .container {
-    padding: 120px 0;
-    gap: 16px;
-  }
-  #about-us-text, .therapist {
-    width: 100%; aspect-ratio: 1 / 1; padding: 24px;
-  }
+  .about-grid { gap: 1rem; padding: 90px 0; }
   .therapist-image { border-radius: 35px; }
-  .therapist-text { border-radius: 30px; }
+  .therapist-text  { border-radius: 30px; }
+
+  .about-popup__panel { width: min(1100px, 86vw); }
 
   .prices-single { flex-direction: column; }
   .prices-text-content { min-height: 16rem; }
   .prices-img { display: none; }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .container { width: min(100%, 90%); }
+
   #sessions .container { padding: 80px 0 60px; }
+  .session-type, .session-type .session-type-text { border-radius: 25px; }
 
-  .session-type,
-  .session-type .session-type-text { border-radius: 25px; }
+  .about-grid { grid-template-columns: 1fr; padding: 70px 0; }
+  .about-card, .therapist { aspect-ratio: 3 / 4; }
+  .therapist-text { bottom: -40px; padding: 6px; border-radius: 20px; transform: translateX(-50%) scale(.6); }
 
-  #about-us .container { padding: 100px 0; }
-  #about-us-text { padding: 16px; }
+  .about-popup__panel {
+    width: 92vw;
+    max-height: 88vh;
+    border-radius: 22px;
+  }
 }

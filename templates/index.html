@@ -4,11 +4,8 @@
 {% block content %}
 <main>
 
-  <!-- SESSIONS (full-bleed) -->
+  <!-- =============== SESSIONS =============== -->
   <section id="sessions" class="section section--sessions">
-    <!-- wave that separates sessions -> about -->
-    <img class="wave wave--bottom" src="{{ url_for('static', filename='images/wave2.svg') }}" alt="" />
-
     <div class="container">
       <div id="sessions-titles">
         <h1>Gde svaka priča dobija podršku</h1>
@@ -43,63 +40,66 @@
     </div>
   </section>
 
-  <!-- ABOUT US -->
+  <!-- Separator: sessions -> about -->
+  <div class="wave-sep" style="--top:#889b6d; --bottom:#d7e8be;">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <rect width="1440" height="200" fill="var(--bottom)"></rect>
+      <path d="M0,60 C240,140 600,0 900,60 C1120,105 1280,120 1440,80 L1440,0 L0,0 Z" fill="var(--top)"></path>
+    </svg>
+  </div>
+
+  <!-- =============== ABOUT (no overlay) =============== -->
   <section id="about-us" class="section section--about">
-    <!-- waves: top attaches to previous, bottom to next -->
-    <img class="wave wave--top"    src="{{ url_for('static', filename='images/wave2.svg') }}" alt="" />
-    <img class="wave wave--bottom" src="{{ url_for('static', filename='images/wave3.svg') }}" alt="" />
-
     <div class="container">
-      <div id="about-us-text">
-        <h1>O nama</h1>
-        <div id="about-us-content">
-          <p>Centar RESET nastao je u septembru 2023. godine kao ostvarenje zajedničkog sna troje kolega – Jelene, Antee i Aleksa. Naša priča započela je još tokom osnovnih studija na fakultetu, gde smo se upoznali i počeli da gradimo temelje profesionalnog i prijateljskog odnosa. Zajedno smo prolazili kroz brojne edukacije, volontiranja, radionice i treninge, međusobno se podržavali i učili jedni od drugih. Kroz sve te godine, podelili smo ne samo profesionalne izazove, već i mnogo lepih trenutaka privatno.</p>
-          <p>Ideja o osnivanju centra rodila se još tada – kao želja da spojimo naš entuzijazam za terapijskim radom, posvećenost pomaganju ljudima i ljubav prema zajedničkom stvaranju. Godinama kasnije, ta ideja je prerasla u stvarnost, vođena željom da stvorimo prostor u kojem ćemo moći da razvijamo svoje ideje i istovremeno pružamo podršku drugima.</p>
-          <p>U ovih godinu i po dana postojanja, naš centar postao je mesto gde se ljudi mogu obratiti za pomoć i podršku, gde mi kao tim rastemo i zajedno razvijamo nove ideje. Ponosni smo na to što kroz rad sa klijentima učimo i mi sami, i što iz dana u dan svedočimo njihovim uspesima, promenama i napretku. Naš tim se međusobno podržava i inspiriše, a centar polako, ali sigurno, nastavlja da raste, baš kao što smo ga i zamislili!</p>
-          <p>Ovo nije samo naš posao – ovo je naš zajednički san, koji živimo i gradimo sa puno strasti, posvećenosti i vere u ono što radimo.</p>
+      <div class="about-grid">
+        <!-- Popup trigger -->
+        <div id="about-us-text" class="about-card">
+          <h1>O nama</h1>
         </div>
-      </div>
 
-      <div class="therapist">
-        <img class="therapist-image" src="{{ url_for('static', filename='images/aleks.png') }}" alt="Aleks Mladenović">
-        <div class="therapist-text">
-          <p>Aleks Mladenović</p>
-          <p>Master Psiholog</p>
-          <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
-          <p>➜</p>
+        <div class="therapist">
+          <img class="therapist-image" src="{{ url_for('static', filename='images/aleks.png') }}" alt="Aleks Mladenović">
+          <div class="therapist-text">
+            <p>Aleks Mladenović</p>
+            <p>Master Psiholog</p>
+            <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
+            <p>➜</p>
+          </div>
         </div>
-      </div>
 
-      <div class="therapist">
-        <img class="therapist-image" src="{{ url_for('static', filename='images/jelena.png') }}" alt="Jelena Spasić">
-        <div class="therapist-text">
-          <p>Jelena Spasić</p>
-          <p>Psiholog</p>
-          <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
-          <p>➜</p>
+        <div class="therapist">
+          <img class="therapist-image" src="{{ url_for('static', filename='images/jelena.png') }}" alt="Jelena Spasić">
+          <div class="therapist-text">
+            <p>Jelena Spasić</p>
+            <p>Psiholog</p>
+            <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
+            <p>➜</p>
+          </div>
         </div>
-      </div>
 
-      <div class="therapist">
-        <img class="therapist-image" src="{{ url_for('static', filename='images/antea.png') }}" alt="Antea Stojiljković">
-        <div class="therapist-text">
-          <p>Antea Stojiljković</p>
-          <p>Master Psiholog</p>
-          <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
-          <p>➜</p>
+        <div class="therapist">
+          <img class="therapist-image" src="{{ url_for('static', filename='images/antea.png') }}" alt="Antea Stojiljković">
+          <div class="therapist-text">
+            <p>Antea Stojiljković</p>
+            <p>Master Psiholog</p>
+            <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
+            <p>➜</p>
+          </div>
         </div>
       </div>
     </div>
-
-    <!-- overlay outside container so sibling selector is simple -->
-    <div id="screen-overlay"></div>
   </section>
 
-  <!-- PRICES -->
-  <section id="prices" class="section section--prices">
-    <img class="wave wave--top" src="{{ url_for('static', filename='images/wave3.svg') }}" alt="" />
-    <img class="wave wave--bottom" src="{{ url_for('static', filename='images/wave2.svg') }}" alt="" />
+  <!-- Separator: about -> prices -->
+  <div class="wave-sep" style="--top:#d7e8be; --bottom:#f5ffe5;">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <rect width="1440" height="200" fill="var(--bottom)"></rect>
+      <path d="M0,60 C240,140 600,0 900,60 C1120,105 1280,120 1440,80 L1440,0 L0,0 Z" fill="var(--top)"></path>
+    </svg>
+  </div>
 
+  <!-- =============== PRICES =============== -->
+  <section id="prices" class="section section--prices">
     <div class="container">
       <div class="prices-content">
         <div id="prices-individual" class="prices-single">
@@ -168,10 +168,16 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section section--contact">
-    <img class="wave wave--top" src="{{ url_for('static', filename='images/wave2.svg') }}" alt="" />
+  <!-- Separator: prices -> contact -->
+  <div class="wave-sep" style="--top:#f5ffe5; --bottom:#889b6d;">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <rect width="1440" height="200" fill="var(--bottom)"></rect>
+      <path d="M0,60 C240,140 600,0 900,60 C1120,105 1280,120 1440,80 L1440,0 L0,0 Z" fill="var(--top)"></path>
+    </svg>
+  </div>
 
+  <!-- =============== CONTACT =============== -->
+  <section id="contact" class="section section--contact">
     <div class="container">
       <div id="contact-info"></div>
       <div class="form">
@@ -200,54 +206,69 @@
     </div>
   </section>
 
+  <!-- =============== O NAMA POPUP (no overlay) =============== -->
+  <div id="about-popup" class="about-popup" aria-hidden="true" role="dialog" aria-labelledby="about-popup-title">
+    <div class="about-popup__panel">
+      <button type="button" class="about-popup__close" aria-label="Zatvori">×</button>
+      <h1 id="about-popup-title">O nama</h1>
+      <div class="about-popup__content">
+        <p>Centar RESET nastao je u septembru 2023. godine kao ostvarenje zajedničkog sna troje kolega – Jelene, Antee i Aleksa. Naša priča započela je još tokom osnovnih studija na fakultetu, gde smo se upoznali i počeli da gradimo temelje profesionalnog i prijateljskog odnosa. Zajedno smo prolazili kroz brojne edukacije, volontiranja, radionice i treninge, međusobno se podržavali i učili jedni od drugih. Kroz sve te godine, podelili smo ne samo profesionalne izazove, već i mnogo lepih trenutaka privatno.</p>
+        <p>Ideja o osnivanju centra rodila se još tada – kao želja da spojimo naš entuzijazam za terapijskim radom, posvećenost pomaganju ljudima i ljubav prema zajedničkom stvaranju. Godinama kasnije, ta ideja je prerasla u stvarnost, vođena željom da stvorimo prostor u kojem ćemo moći da razvijamo svoje ideje i istovremeno pružamo podršku drugima.</p>
+        <p>U ovih godinu i po dana postojanja, naš centar postao je mesto gde se ljudi mogu obratiti za pomoć i podršku, gde mi kao tim rastemo i zajedno razvijamo nove ideje. Ponosni smo na to što kroz rad sa klijentima učimo i mi sami, i što iz dana u dan svedočimo njihovim uspesima, promenama i napretku. Naš tim se međusobno podržava i inspiriše, a centar polako, ali sigurno, nastavlja da raste, baš kao što smo ga i zamislili!</p>
+        <p>Ovo nije samo naš posao – ovo je naš zajednički san, koji živimo i gradimo sa puno strasti, posvećenosti i vere u ono što radimo.</p>
+      </div>
+    </div>
+  </div>
+
 </main>
 
+<!-- =============== Page Scripts =============== -->
 <script>
-  // About-us expand/collapse (kept)
-  const therapists = document.getElementsByClassName('therapist');
-  const aboutUsText = document.getElementById('about-us-text');
-  const aboutUsContent = document.getElementById('about-us-content');
-
-  if (aboutUsText) {
-    aboutUsText.addEventListener('click', () => {
-      const expanding = !aboutUsText.classList.contains('active');
-      aboutUsText.style.width = expanding ? '100%' : '49%';
-      for (let t of therapists) t.style.width = expanding ? '0%' : '49%';
-      aboutUsContent.style.display = expanding ? 'block' : 'none';
-      aboutUsContent.style.opacity = expanding ? '1' : '0';
-      aboutUsText.classList.toggle('active', expanding);
-    });
-  }
-
   // Prices read-more toggles
   for (let readMore of document.getElementsByClassName('read-more')) {
     readMore.addEventListener('click', () => {
-      const pricesSingle = readMore.closest('.prices-single');
-      const pricesImg = pricesSingle?.querySelector('.prices-img');
+      const wrap = readMore.closest('.prices-single');
+      const pricesImg = wrap?.querySelector('.prices-img');
       const pricesText = readMore.parentNode.querySelector('.prices-text');
       const desc = pricesText.querySelector('.prices-description');
-      const all = pricesText.querySelector('.all-prices');
+      const all  = pricesText.querySelector('.all-prices');
 
       const open = !readMore.classList.contains('active');
       desc.style.transform = open ? 'scale(100%)' : 'scale(0%)';
-      all.style.transform = open ? 'scale(0%)' : 'scale(100%)';
+      all.style.transform  = open ? 'scale(0%)'   : 'scale(100%)';
       readMore.classList.toggle('active', open);
       readMore.textContent = open ? 'Cene' : 'Saznaj više';
       if (pricesImg) pricesImg.style.flex = open ? '0' : '1';
     });
   }
 
-  // Mobile nav dropdown (if present in layout)
+  // Mobile nav dropdown (requires #hamburger + .dropdown-links in layout.html)
   const hamburgerBtn = document.getElementById('hamburger');
-  const dropdownLinks = document.getElementsByClassName('dropdown-links')[0];
-  if (hamburgerBtn && dropdownLinks) {
-    let showDropdown = false;
+  const navEl = hamburgerBtn ? hamburgerBtn.closest('nav') : null;
+  if (hamburgerBtn && navEl) {
     hamburgerBtn.addEventListener('click', () => {
-      showDropdown = !showDropdown;
-      dropdownLinks.style.visibility = showDropdown ? 'visible' : 'hidden';
-      dropdownLinks.style.opacity = showDropdown ? '1' : '0';
-      dropdownLinks.style.transform = showDropdown ? 'scaleY(100%)' : 'scaleY(50%)';
+      navEl.classList.toggle('is-open');
     });
   }
+
+  // O NAMA popup (no overlay)
+  const aboutTrigger = document.getElementById('about-us-text');
+  const aboutPopup   = document.getElementById('about-popup');
+  const aboutClose   = aboutPopup ? aboutPopup.querySelector('.about-popup__close') : null;
+
+  function openAbout() {
+    if (!aboutPopup) return;
+    aboutPopup.classList.add('is-open');
+  }
+  function closeAbout() {
+    if (!aboutPopup) return;
+    aboutPopup.classList.remove('is-open');
+  }
+
+  if (aboutTrigger && aboutPopup) {
+    aboutTrigger.addEventListener('click', openAbout);
+  }
+  if (aboutClose) aboutClose.addEventListener('click', closeAbout);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAbout(); });
 </script>
 {% endblock %}
