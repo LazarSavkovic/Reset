@@ -163,11 +163,14 @@ nav .links a:not(:last-child) {
     align-items: center;
     width: 49%;
     aspect-ratio: 1 / 1;
-    overflow: hidden;
     padding: 55px;
     transition: 0.4s;
     position: relative;
     cursor: pointer;
+}
+
+#about-us-text h1 {
+    margin: 0;
 }
 
 
@@ -182,7 +185,7 @@ nav .links a:not(:last-child) {
     transform: scale(45%);
     transition: transform 0.4s;
     text-align: center;
-    z-index: 3;
+    z-index: 15 !important;
 }
 
 .therapist:hover .therapist-text {
@@ -484,12 +487,11 @@ section#contact form button:active {
   /* Reset z-index for all therapists */
   .therapist {
     position: relative;
-    z-index: 1;
   }
   
   /* When hovering ANY therapist */
   .therapist:hover {
-    z-index: 11;
+    z-index: 1000;
   }
   
   /* Show overlay when any therapist is hovered */
@@ -560,6 +562,10 @@ section#contact form button:active {
     #about-us-bgcolor {
         height: 120vw;
     }
+
+    #about-us-text {
+        padding: 35px;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -623,6 +629,10 @@ section#contact form button:active {
         display: none;
     }
 
+    #about-us-text {
+        padding: 25px;
+    }
+
 }
 
 
@@ -660,6 +670,10 @@ section#contact form button:active {
 
     #about-us {
         padding: 150px 15px;
+    }
+
+    #about-us-text {
+        padding: 15px;
     }
 
     #sessions-titles h1 {
