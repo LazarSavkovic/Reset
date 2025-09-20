@@ -302,7 +302,7 @@ section#contact form button:active { transform: scale(0.98); }
   .session-type, .session-type .session-type-text { border-radius: 25px; }
 
   .about-grid { grid-template-columns: 1fr; padding: 70px 0; }
-  .about-card, .therapist { aspect-ratio: 3 / 4; }
+  /* .about-card, .therapist { aspect-ratio: 3 / 4; } */
   .therapist-text { bottom: -40px; padding: 6px; border-radius: 20px; transform: translateX(-50%) scale(.6); }
 
   .about-popup__panel {
