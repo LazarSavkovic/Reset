@@ -4,7 +4,7 @@
 
 html {
   overflow-x: hidden;
-  scrollbar-gutter: stable both-edges;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -276,6 +276,11 @@ section#contact form button:active { transform: scale(0.98); }
   nav .links { display: none; }
   #hamburger { display: block; }
   .container { width: min(1200px, 70%); }
+
+    nav .links a,
+nav .dropdown-links a {
+  color: black;
+}
 }
 
 @media (max-width: 1024px) {
@@ -293,10 +298,18 @@ section#contact form button:active { transform: scale(0.98); }
   .prices-single { flex-direction: column; }
   .prices-text-content { min-height: 16rem; }
   .prices-img { display: none; }
+
+  nav {
+  margin: 0 15%;
+  }
+
+
 }
 
 @media (max-width: 640px) {
   .container { width: min(100%, 90%); }
+
+  #session-types { width: 70%; }
 
   #sessions .container { padding: 80px 0 60px; }
   .session-type, .session-type .session-type-text { border-radius: 25px; }
@@ -310,4 +323,15 @@ section#contact form button:active { transform: scale(0.98); }
     max-height: 88vh;
     border-radius: 22px;
   }
+
+  }
+#about-us .container {
+    padding: 0 25px;
+}
+
+
+  nav {
+  margin: 0 10%;
+  }
+
 }
