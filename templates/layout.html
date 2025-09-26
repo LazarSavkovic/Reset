@@ -17,6 +17,40 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
+
+    <!-- Primary SEO -->
+<meta name="description" content="{% if current_lang=='sr' %}Reset je savetovalište u Beogradu: individualna, partnerska i seanse za adolescente – uživo ili online.{% else %}RESET counseling in Belgrade: individual, couples, and adolescent sessions — in-person or online.{% endif %}">
+
+<!-- Robots -->
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RESET">
+<meta property="og:title" content="{% block og_title %}{% if current_lang=='sr' %}Reset – Psihološko savetovalište{% else %}RESET – Counseling Center{% endif %}{% endblock %}">
+<meta property="og:description" content="{% if current_lang=='sr' %}Individualne, partnerske i seanse za adolescente. Poverljivo, stručno, toplo.{% else %}Individual, couples, and adolescent sessions. Confidential, professional, warm.{% endif %}">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:locale" content="{{ 'sr_RS' if current_lang=='sr' else 'en_US' }}">
+<meta property="og:image" content="https://your-domain.com/static/images/og-default.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@your_twitter">
+<meta name="twitter:title" content="{% if current_lang=='sr' %}Reset – Psihološko savetovalište{% else %}RESET – Counseling Center{% endif %}">
+<meta name="twitter:description" content="{% if current_lang=='sr' %}Individualne, partnerske i seanse za adolescente. Poverljivo, stručno, toplo.{% else %}Individual, couples, and adolescent sessions. Confidential, professional, warm.{% endif %}">
+<meta name="twitter:image" content="https://your-domain.com/static/images/og-default.jpg">
+
+<!-- PWA / theming niceties (optional but nice) -->
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#5b703c">
+
+<!-- Preload your hero/brand assets (performance hint) -->
+<link rel="preload" as="image" href="{{ url_for('static', filename='images/logo-white.png') }}" imagesizes="200px">
+
+
+
 </head>
 
 <body>
@@ -158,6 +192,39 @@
     </div>
   </footer>
   <!-- ======= /FOOTER ======= -->
+
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"RESET",
+  "url":"https://your-domain.com/",
+  "logo":"https://your-domain.com/static/images/logo-white.png",
+  "sameAs":[
+    "https://instagram.com/yourhandle",
+    "https://facebook.com/yourhandle",
+    "https://linkedin.com/company/yourhandle"
+  ],
+  "contactPoint":[
+    {"@type":"ContactPoint","contactType":"customer support","email":"hello@reset.rs","telephone":"+381600000000","areaServed":"RS"}
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"RESET",
+  "url":"https://your-domain.com/",
+  "potentialAction":{
+    "@type":"SearchAction",
+    "target":"https://your-domain.com/?q={search_term_string}",
+    "query-input":"required name=search_term_string"
+  }
+}
+</script>
 
 </body>
 </html>

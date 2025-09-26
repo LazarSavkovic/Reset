@@ -2,7 +2,8 @@
 import os
 import json
 from flask import Flask, render_template, abort, g, request, url_for
-from datetime import date
+from datetime import date, datetime
+from flask import Response, redirect
 
 
 
@@ -120,6 +121,89 @@ def therapist_detail_en(slug):
     if not t:
         abort(404)
     return render_template("therapist.html", therapist=t)
+
+
+# ========= 301 canonicalizers (normalize slashes / language) =========
+
+# /en  -> /en/
+@app.route("/en")
+def en_no_slash():
+    return redirect(url_for("home_en"), code=301)
+
+# Accidental /sr/ -> root /
+@app.route("/sr/")
+def sr_prefix_canonical():
+    return redirect(url_for("home"), code=301)
+
+# Normalize therapist detail slashes
+@app.route("/terapeut/<slug>")
+def therapist_detail_sr_no_slash(slug):
+    return redirect(url_for("therapist_detail_sr", slug=slug), code=301)
+
+@app.route("/en/therapist/<slug>")
+def therapist_detail_en_no_slash(slug):
+    return redirect(url_for("therapist_detail_en", slug=slug), code=301)
+
+
+# ========= robots.txt =========
+@app.route("/robots.txt")
+def robots_txt():
+    root = request.url_root.rstrip("/")
+    content = f"""User-agent: *
+Allow: /
+
+Sitemap: {root}/sitemap.xml
+"""
+    return Response(content, mimetype="text/plain")
+
+
+# ========= sitemap.xml =========
+# Only include the pages you actually have:
+# - Home (SR: "/", EN: "/en/")
+# - Therapist details (SR + EN variants)
+def _abs(u: str) -> str:
+    return request.url_root.rstrip("/") + u
+
+def _url(loc: str, alternates=None, changefreq="weekly", priority="0.8", lastmod=None) -> str:
+    alt_links = ""
+    if alternates:
+        for href, lang in alternates:
+            alt_links += f'\n    <xhtml:link rel="alternate" hreflang="{lang}" href="{href}"/>'
+    lm = lastmod or datetime.utcnow().date().isoformat()
+    return f"""  <url>
+    <loc>{loc}</loc>{alt_links}
+    <changefreq>{changefreq}</changefreq>
+    <priority>{priority}</priority>
+    <lastmod>{lm}</lastmod>
+  </url>"""
+
+@app.route("/sitemap.xml")
+def sitemap_xml():
+    items = []
+
+    # Home (bilingual)
+    sr_home = _abs(url_for("home"))
+    en_home = _abs(url_for("home_en"))
+    items.append(_url(sr_home, alternates=[(sr_home, "sr-RS"), (en_home, "en")], priority="1.0"))
+    items.append(_url(en_home, alternates=[(sr_home, "sr-RS"), (en_home, "en")], priority="1.0"))
+
+    # Therapist details (bilingual paths)
+    for slug in THERAPISTS_BY_SLUG.keys():
+        sr_url = _abs(url_for("therapist_detail_sr", slug=slug))
+        en_url = _abs(url_for("therapist_detail_en", slug=slug))
+        items.append(_url(sr_url, alternates=[(sr_url, "sr-RS"), (en_url, "en")], changefreq="monthly"))
+        items.append(_url(en_url, alternates=[(sr_url, "sr-RS"), (en_url, "en")], changefreq="monthly"))
+
+    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{chr(10).join(items)}
+</urlset>
+"""
+    return Response(xml, mimetype="application/xml")
+
+
 
 
 if __name__ == "__main__":

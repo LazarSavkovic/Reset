@@ -306,14 +306,6 @@
     });
   }
 
-  // Mobile nav dropdown (requires #hamburger + .dropdown-links in layout.html)
-  const hamburgerBtn = document.getElementById('hamburger');
-  const navEl = hamburgerBtn ? hamburgerBtn.closest('nav') : null;
-  if (hamburgerBtn && navEl) {
-    hamburgerBtn.addEventListener('click', () => {
-      navEl.classList.toggle('is-open');
-    });
-  }
 
   // O NAMA / ABOUT popup (no overlay)
   const aboutTrigger = document.getElementById('about-us-text');
@@ -329,4 +321,5 @@
   if (aboutClose) aboutClose.addEventListener('click', closeAbout);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAbout(); });
 </script>
+<script src="{{ url_for('static', filename='js/nav.js') }}"></script>
 {% endblock %}

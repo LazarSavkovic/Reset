@@ -199,4 +199,23 @@
     });
   }
 </script>
+
+{% if therapist %}
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Person",
+  "name":"{{ therapist.name }}",
+  "image":"https://your-domain.com/{{ url_for('static', filename=therapist.image) }}",
+  "jobTitle":"{{ therapist.titles[0] if therapist.titles else 'Psychologist' }}",
+  "affiliation":{"@type":"Organization","name":"RESET"},
+  "knowsAbout":[{% for tag in therapist.focus %}"{{ tag }}"{% if not loop.last %}, {% endif %}{% endfor %}],
+  "worksFor":{"@type":"Organization","name":"RESET"},
+  "url":"{{ request.url }}"
+}
+</script>
+<script src="{{ url_for('static', filename='js/nav.js') }}"></script>
+{% endif %}
+
+
 {% endblock %}
