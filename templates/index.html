@@ -72,41 +72,26 @@
         </div>
 
         <!-- Therapist cards (now links) -->
-        <a class="therapist"
-           href="{{ url_for(detail_ep, slug='aleks-mladenovic') }}"
-           aria-label="{{ 'Profil terapeuta: ' if is_sr else 'Therapist profile: ' }}Aleks Mladenović">
-          <img class="therapist-image" src="{{ url_for('static', filename='images/aleks.png') }}" alt="Aleks Mladenović">
-          <div class="therapist-text">
-            <p>Aleks Mladenović</p>
-            <p>{{ 'Master Psiholog' if is_sr else 'MSc Psychologist' }}</p>
-            <p>{{ 'RE&KBT Psihoterapeut pod supervizijom' if is_sr else 'RE&CBT Psychotherapist under supervision' }}</p>
-            <p>➜</p>
-          </div>
-        </a>
+        {# Therapist cards (data-driven) #}
+{% for t in therapists %}
+  <a class="therapist"
+     href="{{ url_for_therapist(t.slug) }}"
+     aria-label="{{ 'Profil terapeuta: ' if is_sr else 'Therapist profile: ' }}{{ t.name }}">
+    <img class="therapist-image"
+         src="{{ url_for('static', filename=t.image) }}"
+         alt="{{ t.name }}">
+    <div class="therapist-text">
+      <p>{{ t.name }}</p>
+      {# if you add titles_en in JSON, tfield will return localized list; otherwise falls back to titles #}
+      {% set titles_local = tfield(t, 'titles', current_lang) or t.titles %}
+      {% for title in titles_local %}
+        <p>{{ title }}</p>
+      {% endfor %}
+      <p>➜</p>
+    </div>
+  </a>
+{% endfor %}
 
-        <a class="therapist"
-           href="{{ url_for(detail_ep, slug='jelena-spasic') }}"
-           aria-label="{{ 'Profil terapeuta: ' if is_sr else 'Therapist profile: ' }}Jelena Spasić">
-          <img class="therapist-image" src="{{ url_for('static', filename='images/jelena.png') }}" alt="Jelena Spasić">
-          <div class="therapist-text">
-            <p>Jelena Spasić</p>
-            <p>{{ 'Psiholog' if is_sr else 'Psychologist' }}</p>
-            <p>{{ 'RE&KBT Psihoterapeut pod supervizijom' if is_sr else 'RE&CBT Psychotherapist under supervision' }}</p>
-            <p>➜</p>
-          </div>
-        </a>
-
-        <a class="therapist"
-           href="{{ url_for(detail_ep, slug='antea-stojiljkovic') }}"
-           aria-label="{{ 'Profil terapeuta: ' if is_sr else 'Therapist profile: ' }}Antea Stojiljković">
-          <img class="therapist-image" src="{{ url_for('static', filename='images/antea.png') }}" alt="Antea Stojiljković">
-          <div class="therapist-text">
-            <p>Antea Stojiljković</p>
-            <p>{{ 'Master Psiholog' if is_sr else 'MSc Psychologist' }}</p>
-            <p>{{ 'RE&KBT Psihoterapeut pod supervizijom' if is_sr else 'RE&CBT Psychotherapist under supervision' }}</p>
-            <p>➜</p>
-          </div>
-        </a>
 
       </div>
     </div>

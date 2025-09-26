@@ -270,6 +270,72 @@ section#contact form button {
 section#contact form button:hover { transform: scale(1.02); }
 section#contact form button:active { transform: scale(0.98); }
 
+
+/* ===== Footer ===== */
+.site-footer {
+  background: #5b703c; /* a bit darker than header green */
+  color: #f5ffe5;
+}
+.site-footer a { color: #f5ffe5; text-decoration: none; text-align: center; }
+.site-footer a:hover { text-decoration: underline; }
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  gap: 2rem;
+  padding: 40px 0;
+}
+
+.footer-logo img { width: 180px; height: auto; display: block; }
+.footer-tagline { margin: .75rem 0 0; opacity: .9; }
+
+.footer-links {
+  display: flex; flex-direction: column; gap: .4rem;
+}
+
+.footer-contact p { margin: 0 0 .8rem; }
+
+.footer-social-title { margin: 0 0 .5rem; font-weight: 700; }
+.social-row { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
+.social-btn {
+  display: inline-grid; place-items: center;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,.15);
+  transition: transform .15s ease, background .15s ease;
+}
+.social-btn:hover { transform: translateY(-2px); background: rgba(255,255,255,.25); }
+.social-btn svg { width: 20px; height: 20px; fill: #f5ffe5; }
+
+.footer-bottom {
+  background: #4a5d33;
+  padding: 10px 0;
+}
+.footer-bottom-inner {
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-lang {
+  background: #d7e8be; color: #5b703c !important;
+  padding: .35rem .6rem; border-radius: .5rem; font-weight: 700;
+  text-decoration: none !important;
+}
+.footer-lang:hover { filter: brightness(0.98); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .footer-bottom-inner { flex-direction: column; gap: .5rem; }
+}
+
+
+
 /* ===================== Media Queries ===================== */
 @media (max-width: 1400px) {
   html { font-size: 96%; }
@@ -279,7 +345,7 @@ section#contact form button:active { transform: scale(0.98); }
 
     nav .links a,
 nav .dropdown-links a {
-  color: black;
+  color: #5b703c;
 }
 }
 

@@ -2,6 +2,9 @@
 import os
 import json
 from flask import Flask, render_template, abort, g, request, url_for
+from datetime import date
+
+
 
 app = Flask(__name__)
 
@@ -25,6 +28,11 @@ def set_lang_from_path():
     g.lang = "en" if request.path.startswith("/en/") else "sr"
 
 # ---------- Helpers available in templates ----------
+
+
+@app.context_processor
+def inject_current_year():
+    return dict(current_year=date.today().year)
 @app.context_processor
 def inject_helpers():
     def tfield(obj, key, lang):
@@ -91,11 +99,12 @@ def inject_lang_context():
 # Home (both languages use the same template)
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("index.html", therapists=THERAPISTS_LIST)
 
 @app.route("/en/")
 def home_en():
-    return render_template("index.html")
+    return render_template("index.html", therapists=THERAPISTS_LIST)
+
 
 # Therapist detail (localized path segment; same template for both)
 @app.route("/terapeut/<slug>/")
@@ -112,30 +121,6 @@ def therapist_detail_en(slug):
         abort(404)
     return render_template("therapist.html", therapist=t)
 
-# Other localized pages (reuse same templates; switch content via current_lang in templates)
-@app.route("/kontakt")
-def contact():
-    return render_template("contact.html")
-
-@app.route("/en/contact")
-def contact_en():
-    return render_template("contact.html")
-
-@app.route("/cene")
-def pricing():
-    return render_template("pricing.html")
-
-@app.route("/en/pricing")
-def pricing_en():
-    return render_template("pricing.html")
-
-@app.route("/usluge")
-def services():
-    return render_template("services.html")
-
-@app.route("/en/services")
-def services_en():
-    return render_template("services.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
