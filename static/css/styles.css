@@ -276,7 +276,7 @@ section#contact form button:active { transform: scale(0.98); }
   background: #5b703c; /* a bit darker than header green */
   color: #f5ffe5;
 }
-.site-footer a { color: #f5ffe5; text-decoration: none; text-align: center; }
+.site-footer a { color: #f5ffe5; text-decoration: none; }
 .site-footer a:hover { text-decoration: underline; }
 
 .footer-grid {
@@ -319,6 +319,44 @@ section#contact form button:active { transform: scale(0.98); }
   text-decoration: none !important;
 }
 .footer-lang:hover { filter: brightness(0.98); }
+
+/* --- Footer alignment fixes --- */
+.footer-grid {
+  align-items: flex-start;     /* vertical alignment of each column */
+  justify-items: start;        /* horizontal placement of items inside each grid cell */
+}
+
+.footer-brand,
+.footer-links,
+.footer-contact,
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;     /* make sure contents aren't centered */
+  text-align: left;
+}
+
+.footer-links a {
+  display: inline-block;
+  padding: 2px 0;              /* tighten spacing a bit */
+}
+
+/* Optional: widen the footer container a touch so it feels less “centered” overall */
+.site-footer .container {
+  width: min(1200px, 80%);
+}
+
+/* Mobile: keep left-aligned to avoid the “floating in the middle” look */
+@media (max-width: 640px) {
+  .footer-grid {
+    justify-items: start;
+  }
+  .footer-bottom-inner {
+    align-items: flex-start;
+  }
+}
+
+
 
 /* Responsive */
 @media (max-width: 1024px) {

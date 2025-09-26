@@ -20,6 +20,8 @@
 </head>
 
 <body>
+{% set home_ep = 'home_en' if current_lang == 'en' else 'home' %}
+
   <nav>
     <a href="{{ url_for('home_en') if current_lang == 'en' else url_for('home') }}">
 
@@ -27,18 +29,18 @@
     </a>
 
     <div class="links">
-      {% if current_lang == 'sr' %}
-        <a href="#about-us">O nama</a>
-        <a href="#prices">Cenovnik</a>
-        <a href="#schedule">Zakažite seansu</a>
-        <a href="#contact">Kontakt</a>
-      {% else %}
-        <a href="#about-us">About</a>
-        <a href="#prices">Pricing</a>
-        <a href="#schedule">Book a session</a>
-        <a href="#contact">Contact</a>
-      {% endif %}
-    </div>
+  {% if current_lang == 'sr' %}
+    <a href="{{ url_for(home_ep) }}#about-us">O nama</a>
+    <a href="{{ url_for(home_ep) }}#prices">Cenovnik</a>
+    <a href="{{ url_for(home_ep) }}#schedule">Zakažite seansu</a>
+    <a href="#contact">Kontakt</a>
+  {% else %}
+    <a href="{{ url_for(home_ep) }}#about-us">About</a>
+    <a href="{{ url_for(home_ep) }}#prices">Pricing</a>
+    <a href="{{ url_for(home_ep) }}#schedule">Book a session</a>
+    <a href="#contact">Contact</a>
+  {% endif %}
+</div>
 
     {# Language switcher — link to same page in the other language #}
     <div class="links" style="gap:10px; align-items:center;">
@@ -52,23 +54,21 @@
     </div>
 
     <div class="dropdown-links">
-      {# same items as .links; can be DRY’d later with an include #}
-      {% if current_lang == 'sr' %}
-        <a href="#about-us">O nama</a>
-        <a href="#prices">Cenovnik</a>
-        <a href="#schedule">Zakažite seansu</a>
-        <a href="#contact">Kontakt</a>
-      {% else %}
-        <a href="#about-us">About</a>
-        <a href="#prices">Pricing</a>
-        <a href="#schedule">Book a session</a>
-        <a href="#contact">Contact</a>
-      {% endif %}
-      {# Also include the language switch here if you like #}
-      <a href="{{ other_lang_url }}" style="margin-top:8px;">
-        {% if current_lang == 'sr' %}EN{% else %}SR{% endif %}
-      </a>
-    </div>
+  {% if current_lang == 'sr' %}
+    <a href="{{ url_for(home_ep) }}#about-us">O nama</a>
+    <a href="{{ url_for(home_ep) }}#prices">Cenovnik</a>
+    <a href="{{ url_for(home_ep) }}#schedule">Zakažite seansu</a>
+    <a href="#contact">Kontakt</a>
+  {% else %}
+    <a href="{{ url_for(home_ep) }}#about-us">About</a>
+    <a href="{{ url_for(home_ep) }}#prices">Pricing</a>
+    <a href="{{ url_for(home_ep) }}#schedule">Book a session</a>
+    <a href="#contact">Contact</a>
+  {% endif %}
+  <a href="{{ other_lang_url }}" style="margin-top:8px;">
+    {% if current_lang == 'sr' %}EN{% else %}SR{% endif %}
+  </a>
+</div>
 
     <button id="hamburger">
       <img src="{{ url_for('static', filename='images/hamburger.svg') }}" alt="">
@@ -96,11 +96,12 @@
       </div>
 
       <nav class="footer-links" aria-label="{% if current_lang == 'sr' %}Futer navigacija{% else %}Footer navigation{% endif %}">
-        <a href="#about-us">{{ 'O nama' if current_lang == 'sr' else 'About' }}</a>
-        <a href="#prices">{{ 'Cenovnik' if current_lang == 'sr' else 'Pricing' }}</a>
-        <a href="#schedule">{{ 'Zakažite seansu' if current_lang == 'sr' else 'Book a session' }}</a>
-        <a href="#contact">{{ 'Kontakt' if current_lang == 'sr' else 'Contact' }}</a>
-      </nav>
+  <a href="{{ url_for(home_ep) }}#about-us">{{ 'O nama' if current_lang == 'sr' else 'About' }}</a>
+  <a href="{{ url_for(home_ep) }}#prices">{{ 'Cenovnik' if current_lang == 'sr' else 'Pricing' }}</a>
+  <a href="{{ url_for(home_ep) }}#schedule">{{ 'Zakažite seansu' if current_lang == 'sr' else 'Book a session' }}</a>
+  <a href="#contact">{{ 'Kontakt' if current_lang == 'sr' else 'Contact' }}</a>
+</nav>
+
 
       <div class="footer-contact">
         <p>
@@ -148,7 +149,8 @@
 
     <div class="footer-bottom">
       <div class="container footer-bottom-inner">
-        <small>© {{  now().year if false else '' }} RESET — {{ 'Sva prava zadržana' if current_lang == 'sr' else 'All rights reserved' }}</small>
+        <small>© {{ current_year }} RESET — {{ 'Sva prava zadržana' if current_lang == 'sr' else 'All rights reserved' }}</small>
+
         <a class="footer-lang" href="{{ other_lang_url }}">
           {% if current_lang == 'sr' %}EN{% else %}SR{% endif %}
         </a>
