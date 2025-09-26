@@ -1,0 +1,163 @@
+{% extends "layout.html" %}
+{% block title %}{{ therapist.name }} – Terapeut{% endblock %}
+
+{% block content %}
+<main>
+
+  <!-- =============== HERO / PROFILE =============== -->
+  <section class="section section--about" id="therapist-hero">
+    <div class="container">
+      <div class="about-grid" style="align-items:center;">
+        <!-- Profile Card -->
+        <div class="about-card" aria-hidden="true">
+          <h1>{{ therapist.name }}</h1>
+        </div>
+
+        <!-- Image + headings -->
+        <div class="therapist" style="aspect-ratio:auto;">
+          <img
+            class="therapist-image"
+            src="{{ url_for('static', filename=therapist.image) }}"
+            alt="{{ therapist.name }} — profilna fotografija"
+            style="border-radius:70px; max-height:520px; object-fit:cover;"
+          >
+          <div class="therapist-text" style="bottom:-50px;">
+            <p>{{ therapist.name }}</p>
+            {% for t in therapist.titles %}
+              <p>{{ t }}</p>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Summary / badges -->
+        <div class="prices-text-content" style="grid-column:1 / -1;">
+          <h2 style="margin-top:0;">O terapeutu</h2>
+          {% for paragraph in therapist.bio %}
+            <p>{{ paragraph }}</p>
+          {% endfor %}
+
+          {% if therapist.focus and therapist.focus|length %}
+            <h3 style="margin-top:1rem;">Fokus rada</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:.5rem;">
+              {% for tag in therapist.focus %}
+              <span style="background:#5b703c; color:white; padding:.4rem .7rem; border-radius:999px; font-size:.95rem;">
+                {{ tag }}
+              </span>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <div style="margin-top:1.2rem;">
+            <a href="#contact" style="display:inline-block; background:#d7e8be; color:#5b703c; padding:.7rem 1rem; border-radius:.6rem; text-decoration:none; font-weight:700;">
+              Zakažite seansu
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave: hero -> details -->
+  <div class="wave-sep" style="--top:#d7e8be; --bottom:#f5ffe5;">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <rect width="1440" height="200" fill="var(--bottom)"></rect>
+      <path d="M0,60 C240,140 600,0 900,60 C1120,105 1280,120 1440,80 L1440,0 L0,0 Z" fill="var(--top)"></path>
+    </svg>
+  </div>
+
+  <!-- =============== DETAILS (re-using price card styling) =============== -->
+  <section class="section section--prices" id="therapist-details">
+    <div class="container">
+      <div class="prices-content">
+        <div class="prices-single">
+          <div class="prices-text-content">
+            <h3>Rad sa klijentima</h3>
+            <p>
+              {{ therapist.name }} radi sa klijentima online i uživo u Beogradu, u trajanju od 50 minuta po seansi.
+              Fokus je na praktičnim, dokazanim tehnikama i toplom, podržavajućem pristupu.
+            </p>
+            <p class="read-more">Saznaj više</p>
+            <div class="prices-text">
+              <div class="prices-description">
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque suscipit, arcu sit amet
+                  pulvinar hendrerit, lorem risus sodales odio, id dictum ante massa non mi. Integer in arcu sed
+                  nibh imperdiet aliquet.
+                </p>
+              </div>
+              <div class="all-prices">
+                <p><span>Individualno:</span> 50 min (cena po Cene stranici)</p>
+                <p><span>Jezici:</span> Srpski, Engleski (dodatak prema Cene stranici)</p>
+                <p><span>Format:</span> Online ili uživo</p>
+              </div>
+            </div>
+          </div>
+          <div class="prices-img">
+            <img src="{{ url_for('static', filename=therapist.image) }}" alt="{{ therapist.name }} — seansa">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave: details -> contact -->
+  <div class="wave-sep" style="--top:#f5ffe5; --bottom:#889b6d;">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <rect width="1440" height="200" fill="var(--bottom)"></rect>
+      <path d="M0,60 C240,140 600,0 900,60 C1120,105 1280,120 1440,80 L1440,0 L0,0 Z" fill="var(--top)"></path>
+    </svg>
+  </div>
+
+  <!-- =============== CONTACT (same as index) =============== -->
+  <section id="contact" class="section section--contact">
+    <div class="container">
+      <div id="contact-info"></div>
+      <div class="form">
+        <form action="https://usebasin.com/f/52e7368d9d9c" method="POST" enctype="multipart/form-data" id="form">
+          <label for="contact-name">Vaše ime</label>
+          <input type="text" name="name" id="contact-name">
+
+          <label for="contact-lastname">Vaše prezime</label>
+          <input type="text" name="lastname" id="contact-lastname">
+
+          <label for="contact-email">Email</label>
+          <input type="email" name="email" id="contact-email" required>
+
+          <label for="contact-phone">Telefon</label>
+          <input type="text" name="phone" id="contact-phone">
+
+          <label for="contact-title">Naslov</label>
+          <input type="text" name="title" id="contact-title">
+
+          <label for="contact-message">Poruka</label>
+          <textarea name="message" id="contact-message"></textarea>
+
+          <button type="submit">Pošalji</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Reuse your existing page scripts (read-more toggles, etc.) -->
+<script>
+  // Prices read-more toggles (duplicate of index for this page context)
+  for (let readMore of document.getElementsByClassName('read-more')) {
+    readMore.addEventListener('click', () => {
+      const wrap = readMore.closest('.prices-single');
+      const pricesImg = wrap?.querySelector('.prices-img');
+      const pricesText = readMore.parentNode.querySelector('.prices-text');
+      const desc = pricesText.querySelector('.prices-description');
+      const all  = pricesText.querySelector('.all-prices');
+
+      const open = !readMore.classList.contains('active');
+      desc.style.transform = open ? 'scale(100%)' : 'scale(0%)';
+      all.style.transform  = open ? 'scale(0%)'   : 'scale(100%)';
+      readMore.classList.toggle('active', open);
+      readMore.textContent = open ? 'Cene' : 'Saznaj više';
+      if (pricesImg) pricesImg.style.flex = open ? '0' : '1';
+    });
+  }
+</script>
+{% endblock %}

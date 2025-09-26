@@ -1,0 +1,35 @@
+[
+  {
+    "slug": "aleks-mladenovic",
+    "name": "Aleks Mladenović",
+    "titles": ["Master Psiholog", "RE&KBT Psihoterapeut pod supervizijom"],
+    "image": "images/aleks.png",
+    "focus": ["Anksioznost", "Stres", "Samopouzdanje"],
+    "bio": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porta mauris. Donec a ipsum quis leo luctus rutrum.",
+      "Praesent vulputate, justo sed condimentum varius, magna sem tempor justo, at finibus magna orci sit amet elit. Cras sagittis eros at ultricies aliquet."
+    ]
+  },
+  {
+    "slug": "jelena-spasic",
+    "name": "Jelena Spasić",
+    "titles": ["Psiholog", "RE&KBT Psihoterapeut pod supervizijom"],
+    "image": "images/jelena.png",
+    "focus": ["Partnerski odnosi", "Komunikacija", "Samopouzdanje"],
+    "bio": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Curabitur mollis quam id sodales tristique.",
+      "Integer id lacus pharetra, iaculis arcu in, fermentum eros. Ut a justo at ante venenatis lacinia."
+    ]
+  },
+  {
+    "slug": "antea-stojiljkovic",
+    "name": "Antea Stojiljković",
+    "titles": ["Master Psiholog", "RE&KBT Psihoterapeut pod supervizijom"],
+    "image": "images/antea.png",
+    "focus": ["Adolescenti", "Emocionalna regulacija", "Školski stres"],
+    "bio": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet hendrerit nulla.",
+      "Suspendisse potenti. Ut vitae lacus vel eros vulputate scelerisque sit amet sed sem."
+    ]
+  }
+]

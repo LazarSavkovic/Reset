@@ -57,35 +57,42 @@
           <h1>O nama</h1>
         </div>
 
-        <div class="therapist">
-          <img class="therapist-image" src="{{ url_for('static', filename='images/aleks.png') }}" alt="Aleks Mladenović">
-          <div class="therapist-text">
-            <p>Aleks Mladenović</p>
-            <p>Master Psiholog</p>
-            <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
-            <p>➜</p>
-          </div>
-        </div>
+      <a class="therapist"
+   href="{{ url_for('therapist_detail', slug='aleks-mladenovic') }}"
+   aria-label="Profil terapeuta: Aleks Mladenović">
+  <img class="therapist-image" src="{{ url_for('static', filename='images/aleks.png') }}" alt="Aleks Mladenović">
+  <div class="therapist-text">
+    <p>Aleks Mladenović</p>
+    <p>Master Psiholog</p>
+    <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
+    <p>➜</p>
+  </div>
+</a>
 
-        <div class="therapist">
-          <img class="therapist-image" src="{{ url_for('static', filename='images/jelena.png') }}" alt="Jelena Spasić">
-          <div class="therapist-text">
-            <p>Jelena Spasić</p>
-            <p>Psiholog</p>
-            <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
-            <p>➜</p>
-          </div>
-        </div>
+<a class="therapist"
+   href="{{ url_for('therapist_detail', slug='jelena-spasic') }}"
+   aria-label="Profil terapeuta: Jelena Spasić">
+  <img class="therapist-image" src="{{ url_for('static', filename='images/jelena.png') }}" alt="Jelena Spasić">
+  <div class="therapist-text">
+    <p>Jelena Spasić</p>
+    <p>Psiholog</p>
+    <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
+    <p>➜</p>
+  </div>
+</a>
 
-        <div class="therapist">
-          <img class="therapist-image" src="{{ url_for('static', filename='images/antea.png') }}" alt="Antea Stojiljković">
-          <div class="therapist-text">
-            <p>Antea Stojiljković</p>
-            <p>Master Psiholog</p>
-            <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
-            <p>➜</p>
-          </div>
-        </div>
+<a class="therapist"
+   href="{{ url_for('therapist_detail', slug='antea-stojiljkovic') }}"
+   aria-label="Profil terapeuta: Antea Stojiljković">
+  <img class="therapist-image" src="{{ url_for('static', filename='images/antea.png') }}" alt="Antea Stojiljković">
+  <div class="therapist-text">
+    <p>Antea Stojiljković</p>
+    <p>Master Psiholog</p>
+    <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
+    <p>➜</p>
+  </div>
+</a>
+
       </div>
     </div>
   </section>
