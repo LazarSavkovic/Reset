@@ -1,47 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="{{ lang_code }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Reset - Početna{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap"
-        rel="stylesheet">
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icon.png') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  {# Canonical + hreflang alternates #}
+  <link rel="canonical" href="{{ request.url }}" />
+  <link rel="alternate" hreflang="sr-RS" href="{{ alt_urls.sr }}" />
+  <link rel="alternate" hreflang="en"    href="{{ alt_urls.en }}" />
+  <link rel="alternate" hreflang="x-default" href="{{ alt_urls.sr }}" />
+
+  <title>{% block title %}Reset - Početna{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/icon.png') }}">
+  {# fonts #}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
+  <nav>
+    <a href="{{ url_for('home_en') if current_lang == 'en' else url_for('home') }}">
 
-    <nav>
-        <a href="{{ url_for('home') }}">
-            <img id="logo" src="{{ url_for('static', filename='images/logo-white.png') }}" alt="" class="session-type-image">
-        </a>
-        <div class="links">
-            <a href="#about-us">O nama</a>
-            <a href="#prices">Cenovnik</a>
-            <a href="#schedule">Zakažite seansu</a>
-            <a href="#contact">Kontakt</a>
-        </div>
-        <div class="dropdown-links">
-            <a href="#about-us">O nama</a>
-            <a href="#prices">Cenovnik</a>
-            <a href="#schedule">Zakažite seansu</a>
-            <a href="#contact">Kontakt</a>
-        </div>
-        <button id="hamburger">
-            <img src="{{ url_for('static', filename='images/hamburger.svg') }}" alt="">
-        </button>
-        
-    </nav>
+      <img id="logo" src="{{ url_for('static', filename='images/logo-white.png') }}" alt="Reset logo">
+    </a>
 
-    <div>
-        {% block content %}{% endblock %}
+    <div class="links">
+      {% if current_lang == 'sr' %}
+        <a href="#about-us">O nama</a>
+        <a href="#prices">Cenovnik</a>
+        <a href="#schedule">Zakažite seansu</a>
+        <a href="#contact">Kontakt</a>
+      {% else %}
+        <a href="#about-us">About</a>
+        <a href="#prices">Pricing</a>
+        <a href="#schedule">Book a session</a>
+        <a href="#contact">Contact</a>
+      {% endif %}
     </div>
 
-</body>
+    {# Language switcher — link to same page in the other language #}
+    <div class="links" style="gap:10px; align-items:center;">
+      {% if current_lang == 'sr' %}
+        <a href="{{ other_lang_url }}" aria-label="Switch to English">EN</a>
+        <span style="opacity:.7;">| SR</span>
+      {% else %}
+        <span style="opacity:.7;">EN |</span>
+        <a href="{{ other_lang_url }}" aria-label="Prebaci na srpski">SR</a>
+      {% endif %}
+    </div>
 
+    <div class="dropdown-links">
+      {# same items as .links; can be DRY’d later with an include #}
+      {% if current_lang == 'sr' %}
+        <a href="#about-us">O nama</a>
+        <a href="#prices">Cenovnik</a>
+        <a href="#schedule">Zakažite seansu</a>
+        <a href="#contact">Kontakt</a>
+      {% else %}
+        <a href="#about-us">About</a>
+        <a href="#prices">Pricing</a>
+        <a href="#schedule">Book a session</a>
+        <a href="#contact">Contact</a>
+      {% endif %}
+      {# Also include the language switch here if you like #}
+      <a href="{{ other_lang_url }}" style="margin-top:8px;">
+        {% if current_lang == 'sr' %}EN{% else %}SR{% endif %}
+      </a>
+    </div>
+
+    <button id="hamburger">
+      <img src="{{ url_for('static', filename='images/hamburger.svg') }}" alt="">
+    </button>
+  </nav>
+
+  <div>
+    {% block content %}{% endblock %}
+  </div>
+</body>
 </html>

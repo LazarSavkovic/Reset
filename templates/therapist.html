@@ -1,7 +1,21 @@
 {% extends "layout.html" %}
-{% block title %}{{ therapist.name }} – Terapeut{% endblock %}
+
+{% block title %}
+  {% if current_lang == 'sr' %}
+    {{ therapist.name }} – Terapeut
+  {% else %}
+    {{ therapist.name }} – Therapist
+  {% endif %}
+{% endblock %}
 
 {% block content %}
+{% set is_sr = (current_lang == 'sr') %}
+
+{# Pull localized arrays with SR fallback via tfield helper from app.py #}
+{% set titles = tfield(therapist, 'titles', current_lang) %}
+{% set focus  = tfield(therapist, 'focus',  current_lang) %}
+{% set bio    = tfield(therapist, 'bio',    current_lang) %}
+
 <main>
 
   <!-- =============== HERO / PROFILE =============== -->
@@ -18,12 +32,12 @@
           <img
             class="therapist-image"
             src="{{ url_for('static', filename=therapist.image) }}"
-            alt="{{ therapist.name }} — profilna fotografija"
+            alt="{{ therapist.name }} — {{ 'profilna fotografija' if is_sr else 'profile photo' }}"
             style="border-radius:70px; max-height:520px; object-fit:cover;"
           >
           <div class="therapist-text" style="bottom:-50px;">
             <p>{{ therapist.name }}</p>
-            {% for t in therapist.titles %}
+            {% for t in titles %}
               <p>{{ t }}</p>
             {% endfor %}
           </div>
@@ -31,15 +45,16 @@
 
         <!-- Summary / badges -->
         <div class="prices-text-content" style="grid-column:1 / -1;">
-          <h2 style="margin-top:0;">O terapeutu</h2>
-          {% for paragraph in therapist.bio %}
+          <h2 style="margin-top:0;">{{ 'O terapeutu' if is_sr else 'About the therapist' }}</h2>
+
+          {% for paragraph in bio %}
             <p>{{ paragraph }}</p>
           {% endfor %}
 
-          {% if therapist.focus and therapist.focus|length %}
-            <h3 style="margin-top:1rem;">Fokus rada</h3>
+          {% if focus and focus|length %}
+            <h3 style="margin-top:1rem;">{{ 'Fokus rada' if is_sr else 'Areas of focus' }}</h3>
             <div style="display:flex; flex-wrap:wrap; gap:.5rem;">
-              {% for tag in therapist.focus %}
+              {% for tag in focus %}
               <span style="background:#5b703c; color:white; padding:.4rem .7rem; border-radius:999px; font-size:.95rem;">
                 {{ tag }}
               </span>
@@ -49,7 +64,7 @@
 
           <div style="margin-top:1.2rem;">
             <a href="#contact" style="display:inline-block; background:#d7e8be; color:#5b703c; padding:.7rem 1rem; border-radius:.6rem; text-decoration:none; font-weight:700;">
-              Zakažite seansu
+              {{ 'Zakažite seansu' if is_sr else 'Book a session' }}
             </a>
           </div>
         </div>
@@ -71,29 +86,52 @@
       <div class="prices-content">
         <div class="prices-single">
           <div class="prices-text-content">
-            <h3>Rad sa klijentima</h3>
+            <h3>{{ 'Rad sa klijentima' if is_sr else 'Working with clients' }}</h3>
             <p>
-              {{ therapist.name }} radi sa klijentima online i uživo u Beogradu, u trajanju od 50 minuta po seansi.
-              Fokus je na praktičnim, dokazanim tehnikama i toplom, podržavajućem pristupu.
+              {% if is_sr %}
+                {{ therapist.name }} radi sa klijentima online i uživo u Beogradu, u trajanju od oko 50 minuta po seansi.
+                Fokus je na praktičnim, dokazanim tehnikama i toplom, podržavajućem pristupu.
+              {% else %}
+                {{ therapist.name }} works with clients online and in person in Belgrade. Sessions last about 50 minutes.
+                The approach is practical, evidence-based, and supportive.
+              {% endif %}
             </p>
-            <p class="read-more">Saznaj više</p>
+
+            <p class="read-more"
+               data-open-label="{{ 'Cene' if is_sr else 'Details' }}"
+               data-closed-label="{{ 'Saznaj više' if is_sr else 'Read more' }}">
+              {{ 'Saznaj više' if is_sr else 'Read more' }}
+            </p>
+
             <div class="prices-text">
               <div class="prices-description">
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque suscipit, arcu sit amet
-                  pulvinar hendrerit, lorem risus sodales odio, id dictum ante massa non mi. Integer in arcu sed
-                  nibh imperdiet aliquet.
+                  {% if is_sr %}
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque suscipit arcu sit amet
+                    pulvinar hendrerit. Integer in arcu sed nibh imperdiet aliquet. (Zamenite stvarnim opisom pristupa/metoda.)
+                  {% else %}
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque suscipit arcu sit amet
+                    pulvinar hendrerit. Replace this with real method/approach copy in English.
+                  {% endif %}
                 </p>
               </div>
               <div class="all-prices">
-                <p><span>Individualno:</span> 50 min (cena po Cene stranici)</p>
-                <p><span>Jezici:</span> Srpski, Engleski (dodatak prema Cene stranici)</p>
-                <p><span>Format:</span> Online ili uživo</p>
+                {% if is_sr %}
+                  <p><span>Individualno:</span> 50 min (cena po stranici Cene)</p>
+                  <p><span>Jezici:</span> Srpski, Engleski (dodatak prema stranici Cene)</p>
+                  <p><span>Format:</span> Online ili uživo</p>
+                {% else %}
+                  <p><span>Individual:</span> ~50 min (see Pricing page)</p>
+                  <p><span>Languages:</span> Serbian, English (English surcharge per Pricing)</p>
+                  <p><span>Format:</span> Online or in-person</p>
+                {% endif %}
               </div>
             </div>
           </div>
+
           <div class="prices-img">
-            <img src="{{ url_for('static', filename=therapist.image) }}" alt="{{ therapist.name }} — seansa">
+            <img src="{{ url_for('static', filename=therapist.image) }}"
+                 alt="{{ therapist.name }} — {{ 'seansa' if is_sr else 'session' }}">
           </div>
         </div>
       </div>
@@ -114,25 +152,25 @@
       <div id="contact-info"></div>
       <div class="form">
         <form action="https://usebasin.com/f/52e7368d9d9c" method="POST" enctype="multipart/form-data" id="form">
-          <label for="contact-name">Vaše ime</label>
+          <label for="contact-name">{{ 'Vaše ime' if is_sr else 'First name' }}</label>
           <input type="text" name="name" id="contact-name">
 
-          <label for="contact-lastname">Vaše prezime</label>
+          <label for="contact-lastname">{{ 'Vaše prezime' if is_sr else 'Last name' }}</label>
           <input type="text" name="lastname" id="contact-lastname">
 
           <label for="contact-email">Email</label>
           <input type="email" name="email" id="contact-email" required>
 
-          <label for="contact-phone">Telefon</label>
+          <label for="contact-phone">{{ 'Telefon' if is_sr else 'Phone' }}</label>
           <input type="text" name="phone" id="contact-phone">
 
-          <label for="contact-title">Naslov</label>
+          <label for="contact-title">{{ 'Naslov' if is_sr else 'Subject' }}</label>
           <input type="text" name="title" id="contact-title">
 
-          <label for="contact-message">Poruka</label>
+          <label for="contact-message">{{ 'Poruka' if is_sr else 'Message' }}</label>
           <textarea name="message" id="contact-message"></textarea>
 
-          <button type="submit">Pošalji</button>
+          <button type="submit">{{ 'Pošalji' if is_sr else 'Send' }}</button>
         </form>
       </div>
     </div>
@@ -140,10 +178,11 @@
 
 </main>
 
-<!-- Reuse your existing page scripts (read-more toggles, etc.) -->
+<!-- Localized read-more toggle -->
 <script>
-  // Prices read-more toggles (duplicate of index for this page context)
   for (let readMore of document.getElementsByClassName('read-more')) {
+    const OPEN = readMore.getAttribute('data-open-label') || 'Details';
+    const CLOSED = readMore.getAttribute('data-closed-label') || 'Read more';
     readMore.addEventListener('click', () => {
       const wrap = readMore.closest('.prices-single');
       const pricesImg = wrap?.querySelector('.prices-img');
@@ -155,7 +194,7 @@
       desc.style.transform = open ? 'scale(100%)' : 'scale(0%)';
       all.style.transform  = open ? 'scale(0%)'   : 'scale(100%)';
       readMore.classList.toggle('active', open);
-      readMore.textContent = open ? 'Cene' : 'Saznaj više';
+      readMore.textContent = open ? OPEN : CLOSED;
       if (pricesImg) pricesImg.style.flex = open ? '0' : '1';
     });
   }

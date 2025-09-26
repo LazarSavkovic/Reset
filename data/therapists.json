@@ -3,33 +3,51 @@
     "slug": "aleks-mladenovic",
     "name": "Aleks Mladenović",
     "titles": ["Master Psiholog", "RE&KBT Psihoterapeut pod supervizijom"],
+    "titles_en": ["MSc Psychologist", "RE&CBT Psychotherapist (under supervision)"],
     "image": "images/aleks.png",
     "focus": ["Anksioznost", "Stres", "Samopouzdanje"],
+    "focus_en": ["Anxiety", "Stress", "Self-confidence"],
     "bio": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porta mauris. Donec a ipsum quis leo luctus rutrum.",
-      "Praesent vulputate, justo sed condimentum varius, magna sem tempor justo, at finibus magna orci sit amet elit. Cras sagittis eros at ultricies aliquet."
+      "SR: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porta mauris.",
+      "SR: Praesent vulputate magna sem tempor justo, at finibus magna orci sit amet elit."
+    ],
+    "bio_en": [
+      "EN: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porta mauris.",
+      "EN: Praesent vulputate magna sem tempor justo, at finibus magna orci sit amet elit."
     ]
   },
   {
     "slug": "jelena-spasic",
     "name": "Jelena Spasić",
     "titles": ["Psiholog", "RE&KBT Psihoterapeut pod supervizijom"],
+    "titles_en": ["Psychologist", "RE&CBT Psychotherapist (under supervision)"],
     "image": "images/jelena.png",
     "focus": ["Partnerski odnosi", "Komunikacija", "Samopouzdanje"],
+    "focus_en": ["Relationship issues", "Communication", "Self-confidence"],
     "bio": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Curabitur mollis quam id sodales tristique.",
-      "Integer id lacus pharetra, iaculis arcu in, fermentum eros. Ut a justo at ante venenatis lacinia."
+      "SR: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi.",
+      "SR: Integer id lacus pharetra, iaculis arcu in, fermentum eros."
+    ],
+    "bio_en": [
+      "EN: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi.",
+      "EN: Integer id lacus pharetra, iaculis arcu in, fermentum eros."
     ]
   },
   {
     "slug": "antea-stojiljkovic",
     "name": "Antea Stojiljković",
     "titles": ["Master Psiholog", "RE&KBT Psihoterapeut pod supervizijom"],
+    "titles_en": ["MSc Psychologist", "RE&CBT Psychotherapist (under supervision)"],
     "image": "images/antea.png",
     "focus": ["Adolescenti", "Emocionalna regulacija", "Školski stres"],
+    "focus_en": ["Adolescents", "Emotional regulation", "School stress"],
     "bio": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet hendrerit nulla.",
-      "Suspendisse potenti. Ut vitae lacus vel eros vulputate scelerisque sit amet sed sem."
+      "SR: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet hendrerit nulla.",
+      "SR: Suspendisse potenti. Ut vitae lacus vel eros vulputate scelerisque."
+    ],
+    "bio_en": [
+      "EN: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet hendrerit nulla.",
+      "EN: Suspendisse potenti. Ut vitae lacus vel eros vulputate scelerisque."
     ]
   }
 ]

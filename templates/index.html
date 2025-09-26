@@ -1,39 +1,53 @@
 {% extends "layout.html" %}
-{% block title %}Reset - Početna{% endblock %}
+{% block title %}
+  {% if current_lang == 'sr' %}
+    Reset - Početna
+  {% else %}
+    Reset - Home
+  {% endif %}
+{% endblock %}
 
 {% block content %}
+{% set is_sr = (current_lang == 'sr') %}
+{% set detail_ep = 'therapist_detail_sr' if is_sr else 'therapist_detail_en' %}
+
 <main>
 
   <!-- =============== SESSIONS =============== -->
   <section id="sessions" class="section section--sessions">
     <div class="container">
       <div id="sessions-titles">
-        <h1>Gde svaka priča dobija podršku</h1>
-        <h2>Koji tip seanse Vas interesuje?</h2>
+        {% if is_sr %}
+          <h1>Gde svaka priča dobija podršku</h1>
+          <h2>Koji tip seanse Vas interesuje?</h2>
+        {% else %}
+          <h1>Where every story gets support</h1>
+          <h2>Which type of session are you interested in?</h2>
+        {% endif %}
       </div>
 
       <div id="session-types">
         <div class="session-type" id="individual">
-          <img src="{{ url_for('static', filename='images/individualna.png') }}" alt="Individualna seansa" class="session-type-image">
+          <img src="{{ url_for('static', filename='images/individualna.png') }}" alt="{{ 'Individualna seansa' if is_sr else 'Individual session' }}" class="session-type-image">
           <div class="session-type-text">
-            <h3>Individualna</h3>
-            <h4>Za mene</h4>
+            <h3>{{ 'Individualna' if is_sr else 'Individual' }}</h3>
+            <h4>{{ 'Za mene' if is_sr else 'For me' }}</h4>
           </div>
         </div>
 
         <div class="session-type" id="couples">
-          <img src="{{ url_for('static', filename='images/partner.png') }}" alt="Partnerska seansa" class="session-type-image">
+          <img src="{{ url_for('static', filename='images/partner.png') }}" alt="{{ 'Partnerska seansa' if is_sr else 'Couples session' }}" class="session-type-image">
           <div class="session-type-text">
-            <h3>Partnerska</h3>
-            <h4>Za nas</h4>
+            <h3>{{ 'Partnerska' if is_sr else 'Couples' }}</h3>
+            <h4>{{ 'Za nas' if is_sr else 'For us' }}</h4>
           </div>
         </div>
 
         <div class="session-type" id="adolescents">
-          <img src="{{ url_for('static', filename='images/dete.png') }}" alt="Adolescenti seanse" class="session-type-image">
+          <img src="{{ url_for('static', filename='images/dete.png') }}" alt="{{ 'Adolescenti seanse' if is_sr else 'Adolescents sessions' }}" class="session-type-image">
           <div class="session-type-text">
-            <h3>Adolescenti</h3>
-            <h4>Za moje dete</h4>
+            <h3>{{ 'Adolescenti' if is_sr else 'Adolescents' }}</h3>
+            <h4>{{ 'Za moje dete' if is_sr else 'For my child' }}</h4>
           </div>
         </div>
       </div>
@@ -54,44 +68,45 @@
       <div class="about-grid">
         <!-- Popup trigger -->
         <div id="about-us-text" class="about-card">
-          <h1>O nama</h1>
+          <h1>{{ 'O nama' if is_sr else 'About us' }}</h1>
         </div>
 
-      <a class="therapist"
-   href="{{ url_for('therapist_detail', slug='aleks-mladenovic') }}"
-   aria-label="Profil terapeuta: Aleks Mladenović">
-  <img class="therapist-image" src="{{ url_for('static', filename='images/aleks.png') }}" alt="Aleks Mladenović">
-  <div class="therapist-text">
-    <p>Aleks Mladenović</p>
-    <p>Master Psiholog</p>
-    <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
-    <p>➜</p>
-  </div>
-</a>
+        <!-- Therapist cards (now links) -->
+        <a class="therapist"
+           href="{{ url_for(detail_ep, slug='aleks-mladenovic') }}"
+           aria-label="{{ 'Profil terapeuta: ' if is_sr else 'Therapist profile: ' }}Aleks Mladenović">
+          <img class="therapist-image" src="{{ url_for('static', filename='images/aleks.png') }}" alt="Aleks Mladenović">
+          <div class="therapist-text">
+            <p>Aleks Mladenović</p>
+            <p>{{ 'Master Psiholog' if is_sr else 'MSc Psychologist' }}</p>
+            <p>{{ 'RE&KBT Psihoterapeut pod supervizijom' if is_sr else 'RE&CBT Psychotherapist under supervision' }}</p>
+            <p>➜</p>
+          </div>
+        </a>
 
-<a class="therapist"
-   href="{{ url_for('therapist_detail', slug='jelena-spasic') }}"
-   aria-label="Profil terapeuta: Jelena Spasić">
-  <img class="therapist-image" src="{{ url_for('static', filename='images/jelena.png') }}" alt="Jelena Spasić">
-  <div class="therapist-text">
-    <p>Jelena Spasić</p>
-    <p>Psiholog</p>
-    <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
-    <p>➜</p>
-  </div>
-</a>
+        <a class="therapist"
+           href="{{ url_for(detail_ep, slug='jelena-spasic') }}"
+           aria-label="{{ 'Profil terapeuta: ' if is_sr else 'Therapist profile: ' }}Jelena Spasić">
+          <img class="therapist-image" src="{{ url_for('static', filename='images/jelena.png') }}" alt="Jelena Spasić">
+          <div class="therapist-text">
+            <p>Jelena Spasić</p>
+            <p>{{ 'Psiholog' if is_sr else 'Psychologist' }}</p>
+            <p>{{ 'RE&KBT Psihoterapeut pod supervizijom' if is_sr else 'RE&CBT Psychotherapist under supervision' }}</p>
+            <p>➜</p>
+          </div>
+        </a>
 
-<a class="therapist"
-   href="{{ url_for('therapist_detail', slug='antea-stojiljkovic') }}"
-   aria-label="Profil terapeuta: Antea Stojiljković">
-  <img class="therapist-image" src="{{ url_for('static', filename='images/antea.png') }}" alt="Antea Stojiljković">
-  <div class="therapist-text">
-    <p>Antea Stojiljković</p>
-    <p>Master Psiholog</p>
-    <p>RE&amp;KBT Psihoterapeut pod supervizijom</p>
-    <p>➜</p>
-  </div>
-</a>
+        <a class="therapist"
+           href="{{ url_for(detail_ep, slug='antea-stojiljkovic') }}"
+           aria-label="{{ 'Profil terapeuta: ' if is_sr else 'Therapist profile: ' }}Antea Stojiljković">
+          <img class="therapist-image" src="{{ url_for('static', filename='images/antea.png') }}" alt="Antea Stojiljković">
+          <div class="therapist-text">
+            <p>Antea Stojiljković</p>
+            <p>{{ 'Master Psiholog' if is_sr else 'MSc Psychologist' }}</p>
+            <p>{{ 'RE&KBT Psihoterapeut pod supervizijom' if is_sr else 'RE&CBT Psychotherapist under supervision' }}</p>
+            <p>➜</p>
+          </div>
+        </a>
 
       </div>
     </div>
@@ -109,66 +124,114 @@
   <section id="prices" class="section section--prices">
     <div class="container">
       <div class="prices-content">
+        <!-- INDIVIDUAL -->
         <div id="prices-individual" class="prices-single">
           <div class="prices-text-content">
-            <h3>INDIVIDUALNE SEANSE</h3>
-            <p class="read-more">Saznaj više</p>
+            <h3>{{ 'INDIVIDUALNE SEANSE' if is_sr else 'INDIVIDUAL SESSIONS' }}</h3>
+            <p class="read-more"
+               data-open-label="{{ 'Cene' if is_sr else 'Prices' }}"
+               data-closed-label="{{ 'Saznaj više' if is_sr else 'Read more' }}">
+              {{ 'Saznaj više' if is_sr else 'Read more' }}
+            </p>
             <div class="prices-text">
               <div class="prices-description">
-                <p>Individualna seansa podrazumeva rad jedan na jedan sa terapeutom u sigurnom i poverljivom okruženju. Može biti održana online ili uživo u prostorijama savetovališta. Jedna seansa traje 50 minuta do sat vremena, uz mogućnost zakazivanja duple seanse. Podaci do kojih psiholog dolazi u radu sa klijentom poverljive su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti.</p>
+                {% if is_sr %}
+                  <p>Individualna seansa podrazumeva rad jedan na jedan sa terapeutom u sigurnom i poverljivom okruženju. Može biti održana online ili uživo u prostorijama savetovališta. Jedna seansa traje 50 minuta do sat vremena, uz mogućnost zakazivanja duple seanse. Podaci do kojih psiholog dolazi u radu sa klijentom poverljive su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti.</p>
+                {% else %}
+                  <p>Individual sessions are one-on-one with a therapist in a safe, confidential setting. Available online or in person at our counseling center. Each session lasts ~50 minutes, with an option to book a double session. Client information is confidential and protected.</p>
+                {% endif %}
               </div>
               <div class="all-prices">
-                <p><span>Online (Srbija):</span> 2.500 RSD</p>
-                <p><span>Online (inostranstvo):</span> 25 EUR (+provizija)</p>
-                <p><span>Uživo:</span> 3.000 RSD</p>
-                <p><span>Seansa na engleskom jeziku:</span> dodatnih 500 RSD / 5 EUR</p>
+                {% if is_sr %}
+                  <p><span>Online (Srbija):</span> 2.500 RSD</p>
+                  <p><span>Online (inostranstvo):</span> 25 EUR (+provizija)</p>
+                  <p><span>Uživo:</span> 3.000 RSD</p>
+                  <p><span>Seansa na engleskom jeziku:</span> dodatnih 500 RSD / 5 EUR</p>
+                {% else %}
+                  <p><span>Online (Serbia):</span> 2,500 RSD</p>
+                  <p><span>Online (abroad):</span> €25 (+fee)</p>
+                  <p><span>In person:</span> 3,000 RSD</p>
+                  <p><span>Session in English:</span> +500 RSD / €5</p>
+                {% endif %}
               </div>
             </div>
           </div>
           <div class="prices-img">
-            <img src="{{ url_for('static', filename='images/prices-individual.png') }}" alt="Individualne cene">
+            <img src="{{ url_for('static', filename='images/prices-individual.png') }}" alt="{{ 'Individualne cene' if is_sr else 'Individual session pricing' }}">
           </div>
         </div>
 
+        <!-- COUPLES -->
         <div id="prices-couple" class="prices-single">
           <div class="prices-text-content">
-            <h3>PARTNERSKE SEANSE</h3>
-            <p class="read-more">Saznaj više</p>
+            <h3>{{ 'PARTNERSKE SEANSE' if is_sr else 'COUPLES SESSIONS' }}</h3>
+            <p class="read-more"
+               data-open-label="{{ 'Cene' if is_sr else 'Prices' }}"
+               data-closed-label="{{ 'Saznaj više' if is_sr else 'Read more' }}">
+              {{ 'Saznaj više' if is_sr else 'Read more' }}
+            </p>
             <div class="prices-text">
               <div class="prices-description">
-                <p>Partnerska seansa je namenjena parovima koji žele da rade na svojoj vezi, komunikaciji i rešavanju problema. Seanse mogu biti održane online ili uživo u prostorijama savetovališta. Jedna seansa traje 50 minuta do sat vremena, uz mogućnost zakazivanja duple seanse. Podaci do kojih psiholog dolazi u radu sa klijentima poverljive su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti.</p>
+                {% if is_sr %}
+                  <p>Partnerska seansa je namenjena parovima koji žele da rade na svojoj vezi, komunikaciji i rešavanju problema. Seanse mogu biti održane online ili uživo u prostorijama savetovališta. Jedna seansa traje 50 minuta do sat vremena, uz mogućnost zakazivanja duple seanse. Podaci do kojih psiholog dolazi u radu sa klijentima poverljive su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti.</p>
+                {% else %}
+                  <p>Couples sessions help partners improve communication and resolve conflicts. Available online or in person. Sessions last ~50 minutes, with an option to book a double session. Confidentiality is strictly maintained.</p>
+                {% endif %}
               </div>
               <div class="all-prices">
-                <p><span>Online (Srbija):</span> 3.500 RSD</p>
-                <p><span>Online (inostranstvo):</span> 35 EUR (+provizija)</p>
-                <p><span>Uživo:</span> 4.000 RSD</p>
-                <p><span>Seansa na engleskom jeziku:</span> dodatnih 500 RSD / 5 EUR</p>
+                {% if is_sr %}
+                  <p><span>Online (Srbija):</span> 3.500 RSD</p>
+                  <p><span>Online (inostranstvo):</span> 35 EUR (+provizija)</p>
+                  <p><span>Uživo:</span> 4.000 RSD</p>
+                  <p><span>Seansa na engleskom jeziku:</span> dodatnih 500 RSD / 5 EUR</p>
+                {% else %}
+                  <p><span>Online (Serbia):</span> 3,500 RSD</p>
+                  <p><span>Online (abroad):</span> €35 (+fee)</p>
+                  <p><span>In person:</span> 4,000 RSD</p>
+                  <p><span>Session in English:</span> +500 RSD / €5</p>
+                {% endif %}
               </div>
             </div>
           </div>
           <div class="prices-img">
-            <img src="{{ url_for('static', filename='images/prices-couple.png') }}" alt="Partnerske cene">
+            <img src="{{ url_for('static', filename='images/prices-couple.png') }}" alt="{{ 'Partnerske cene' if is_sr else 'Couples session pricing' }}">
           </div>
         </div>
 
+        <!-- ADOLESCENTS -->
         <div id="prices-teen" class="prices-single">
           <div class="prices-text-content">
-            <h3>ZA MOJE DETE</h3>
-            <p class="read-more">Saznaj više</p>
+            <h3>{{ 'ZA MOJE DETE' if is_sr else 'FOR MY CHILD' }}</h3>
+            <p class="read-more"
+               data-open-label="{{ 'Cene' if is_sr else 'Prices' }}"
+               data-closed-label="{{ 'Saznaj više' if is_sr else 'Read more' }}">
+              {{ 'Saznaj više' if is_sr else 'Read more' }}
+            </p>
             <div class="prices-text">
               <div class="prices-description">
-                <p>Seanse za adolescente omogućavaju mladima da uz podršku terapeuta pronađu načine da se nose sa različitim izazovima. Seanse su dostupne za maloletna lica, pri čemu je za one između 14 i 16 godina neophodan pristanak roditelja. Sa decom mlađom od 14 godina ne radimo. Individualni rad sa terapeutom može se odvijati online ili uživo. Jedna seansa traje 50 minuta do sat vremena. Podaci do kojih psiholog dolazi u radu sa klijentom poverljive su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti.</p>
+                {% if is_sr %}
+                  <p>Seanse za adolescente omogućavaju mladima da uz podršku terapeuta pronađu načine da se nose sa različitim izazovima. Seanse su dostupne za maloletna lica, pri čemu je za one između 14 i 16 godina neophodan pristanak roditelja. Sa decom mlađom od 14 godina ne radimo. Individualni rad sa terapeutom može se odvijati online ili uživo. Jedna seansa traje 50 minuta do sat vremena. Podaci do kojih psiholog dolazi u radu sa klijentom poverljive su prirode i čuvanje njihove tajnosti jedna je od osnovnih dužnosti.</p>
+                {% else %}
+                  <p>Adolescent sessions give young people a safe space to work through challenges with a therapist’s support. Available for minors; parental consent is required for ages 14–16. We do not work with children under 14. Sessions are online or in person and last ~50 minutes. Confidentiality applies.</p>
+                {% endif %}
               </div>
               <div class="all-prices">
-                <p><span>Online (Srbija):</span> 2.500 RSD</p>
-                <p><span>Online (inostranstvo):</span> 25 EUR (+provizija)</p>
-                <p><span>Uživo:</span> 3.000 RSD</p>
-                <p><span>Seansa na engleskom jeziku:</span> dodatnih 500 RSD / 5 EUR</p>
+                {% if is_sr %}
+                  <p><span>Online (Srbija):</span> 2.500 RSD</p>
+                  <p><span>Online (inostranstvo):</span> 25 EUR (+provizija)</p>
+                  <p><span>Uživo:</span> 3.000 RSD</p>
+                  <p><span>Seansa na engleskom jeziku:</span> dodatnih 500 RSD / 5 EUR</p>
+                {% else %}
+                  <p><span>Online (Serbia):</span> 2,500 RSD</p>
+                  <p><span>Online (abroad):</span> €25 (+fee)</p>
+                  <p><span>In person:</span> 3,000 RSD</p>
+                  <p><span>Session in English:</span> +500 RSD / €5</p>
+                {% endif %}
               </div>
             </div>
           </div>
           <div class="prices-img">
-            <img src="{{ url_for('static', filename='images/prices-teen.png') }}" alt="Cene za adolescente">
+            <img src="{{ url_for('static', filename='images/prices-teen.png') }}" alt="{{ 'Cene za adolescente' if is_sr else 'Adolescent session pricing' }}">
           </div>
         </div>
       </div>
@@ -189,25 +252,25 @@
       <div id="contact-info"></div>
       <div class="form">
         <form action="https://usebasin.com/f/52e7368d9d9c" method="POST" enctype="multipart/form-data" id="form">
-          <label for="contact-name">Vaše ime</label>
+          <label for="contact-name">{{ 'Vaše ime' if is_sr else 'First name' }}</label>
           <input type="text" name="name" id="contact-name">
 
-          <label for="contact-lastname">Vaše prezime</label>
+          <label for="contact-lastname">{{ 'Vaše prezime' if is_sr else 'Last name' }}</label>
           <input type="text" name="lastname" id="contact-lastname">
 
           <label for="contact-email">Email</label>
           <input type="email" name="email" id="contact-email" required>
 
-          <label for="contact-phone">Telefon</label>
+          <label for="contact-phone">{{ 'Telefon' if is_sr else 'Phone' }}</label>
           <input type="text" name="phone" id="contact-phone">
 
-          <label for="contact-title">Naslov</label>
+          <label for="contact-title">{{ 'Naslov' if is_sr else 'Subject' }}</label>
           <input type="text" name="title" id="contact-title">
 
-          <label for="contact-message">Poruka</label>
+          <label for="contact-message">{{ 'Poruka' if is_sr else 'Message' }}</label>
           <textarea name="message" id="contact-message"></textarea>
 
-          <button type="submit">Send</button>
+          <button type="submit">{{ 'Pošalji' if is_sr else 'Send' }}</button>
         </form>
       </div>
     </div>
@@ -216,13 +279,20 @@
   <!-- =============== O NAMA POPUP (no overlay) =============== -->
   <div id="about-popup" class="about-popup" aria-hidden="true" role="dialog" aria-labelledby="about-popup-title">
     <div class="about-popup__panel">
-      <button type="button" class="about-popup__close" aria-label="Zatvori">×</button>
-      <h1 id="about-popup-title">O nama</h1>
+      <button type="button" class="about-popup__close" aria-label="{{ 'Zatvori' if is_sr else 'Close' }}">×</button>
+      <h1 id="about-popup-title">{{ 'O nama' if is_sr else 'About us' }}</h1>
       <div class="about-popup__content">
-        <p>Centar RESET nastao je u septembru 2023. godine kao ostvarenje zajedničkog sna troje kolega – Jelene, Antee i Aleksa. Naša priča započela je još tokom osnovnih studija na fakultetu, gde smo se upoznali i počeli da gradimo temelje profesionalnog i prijateljskog odnosa. Zajedno smo prolazili kroz brojne edukacije, volontiranja, radionice i treninge, međusobno se podržavali i učili jedni od drugih. Kroz sve te godine, podelili smo ne samo profesionalne izazove, već i mnogo lepih trenutaka privatno.</p>
-        <p>Ideja o osnivanju centra rodila se još tada – kao želja da spojimo naš entuzijazam za terapijskim radom, posvećenost pomaganju ljudima i ljubav prema zajedničkom stvaranju. Godinama kasnije, ta ideja je prerasla u stvarnost, vođena željom da stvorimo prostor u kojem ćemo moći da razvijamo svoje ideje i istovremeno pružamo podršku drugima.</p>
-        <p>U ovih godinu i po dana postojanja, naš centar postao je mesto gde se ljudi mogu obratiti za pomoć i podršku, gde mi kao tim rastemo i zajedno razvijamo nove ideje. Ponosni smo na to što kroz rad sa klijentima učimo i mi sami, i što iz dana u dan svedočimo njihovim uspesima, promenama i napretku. Naš tim se međusobno podržava i inspiriše, a centar polako, ali sigurno, nastavlja da raste, baš kao što smo ga i zamislili!</p>
-        <p>Ovo nije samo naš posao – ovo je naš zajednički san, koji živimo i gradimo sa puno strasti, posvećenosti i vere u ono što radimo.</p>
+        {% if is_sr %}
+          <p>Centar RESET nastao je u septembru 2023. godine kao ostvarenje zajedničkog sna troje kolega – Jelene, Antee i Aleksa. Naša priča započela je još tokom osnovnih studija na fakultetu, gde smo se upoznali i počeli da gradimo temelje profesionalnog i prijateljskog odnosa. Zajedno smo prolazili kroz brojne edukacije, volontiranja, radionice i treninge, međusobno se podržavali i učili jedni od drugih. Kroz sve te godine, podelili smo ne samo profesionalne izazove, već i mnogo lepih trenutaka privatno.</p>
+          <p>Ideja o osnivanju centra rodila se još tada – kao želja da spojimo naš entuzijazam za terapijskim radom, posvećenost pomaganju ljudima i ljubav prema zajedničkom stvaranju. Godinama kasnije, ta ideja je prerasla u stvarnost, vođena željom da stvorimo prostor u kojem ćemo moći da razvijamo svoje ideje i istovremeno pružamo podršku drugima.</p>
+          <p>U ovih godinu i po dana postojanja, naš centar postao je mesto gde se ljudi mogu obratiti za pomoć i podršku, gde mi kao tim rastemo i zajedno razvijamo nove ideje. Ponosni smo na to što kroz rad sa klijentima učimo i mi sami, i što iz dana u dan svedočimo njihovim uspesima, promenama i napretku. Naš tim se međusobno podržava i inspiriše, a centar polako, ali sigurno, nastavlja da raste, baš kao što smo ga i zamislili!</p>
+          <p>Ovo nije samo naš posao – ovo je naš zajednički san, koji živimo i gradimo sa puno strasti, posvećenosti i vere u ono što radimo.</p>
+        {% else %}
+          <p>RESET Center was founded in September 2023 by three colleagues—Jelena, Antea, and Aleks—who met during their undergraduate studies. Over the years we trained together, volunteered, ran workshops, supported one another, and built both professional and personal bonds.</p>
+          <p>The idea of our center began as a shared wish: to combine a passion for therapeutic work, dedication to helping people, and a love for creating something together. Years later, that idea became reality—a warm, supportive space for clients and a place where we keep learning and growing as a team.</p>
+          <p>Today, RESET is where people turn for help and encouragement, and where we witness meaningful change every day. We’re proud of our clients’ progress and grateful to play a small part in it.</p>
+          <p>This is more than a job—it’s a shared dream we build with care, commitment, and belief in what we do.</p>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -231,8 +301,10 @@
 
 <!-- =============== Page Scripts =============== -->
 <script>
-  // Prices read-more toggles
+  // Prices read-more toggles (localized labels via data-* attributes)
   for (let readMore of document.getElementsByClassName('read-more')) {
+    const OPEN = readMore.getAttribute('data-open-label') || 'Prices';
+    const CLOSED = readMore.getAttribute('data-closed-label') || 'Read more';
     readMore.addEventListener('click', () => {
       const wrap = readMore.closest('.prices-single');
       const pricesImg = wrap?.querySelector('.prices-img');
@@ -244,7 +316,7 @@
       desc.style.transform = open ? 'scale(100%)' : 'scale(0%)';
       all.style.transform  = open ? 'scale(0%)'   : 'scale(100%)';
       readMore.classList.toggle('active', open);
-      readMore.textContent = open ? 'Cene' : 'Saznaj više';
+      readMore.textContent = open ? OPEN : CLOSED;
       if (pricesImg) pricesImg.style.flex = open ? '0' : '1';
     });
   }
@@ -258,19 +330,13 @@
     });
   }
 
-  // O NAMA popup (no overlay)
+  // O NAMA / ABOUT popup (no overlay)
   const aboutTrigger = document.getElementById('about-us-text');
   const aboutPopup   = document.getElementById('about-popup');
   const aboutClose   = aboutPopup ? aboutPopup.querySelector('.about-popup__close') : null;
 
-  function openAbout() {
-    if (!aboutPopup) return;
-    aboutPopup.classList.add('is-open');
-  }
-  function closeAbout() {
-    if (!aboutPopup) return;
-    aboutPopup.classList.remove('is-open');
-  }
+  function openAbout() { if (aboutPopup) aboutPopup.classList.add('is-open'); }
+  function closeAbout() { if (aboutPopup) aboutPopup.classList.remove('is-open'); }
 
   if (aboutTrigger && aboutPopup) {
     aboutTrigger.addEventListener('click', openAbout);
