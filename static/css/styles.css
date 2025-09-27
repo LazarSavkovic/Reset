@@ -32,7 +32,6 @@ nav {
 }
 nav #logo { width: 200px; }
 nav .links { display: flex; }
-
 nav .links a,
 nav .dropdown-links a {
   margin-left: 15px; padding-right: 15px; color: #fff;
@@ -67,22 +66,22 @@ nav.is-open .dropdown-links { visibility: visible; opacity: 1; transform: scaleY
 }
 .session-type .session-type-image { width: 100%; display: block; border-radius: inherit; }
 
-/* Corner label (default) → full overlay (hover) */
+/* Corner pill by default (ONLY inset so transition is stable) */
 .session-type .session-type-text {
-  position: absolute; right: 10px; bottom: 10px;
+  position: absolute;
+  inset: auto 10px 10px auto;               /* top | right | bottom | left */
   display: inline-flex; align-items: center; gap: .5rem;
   padding: 8px 12px; background: rgba(0,0,0,.2); color: #fff; border-radius: 14px;
   opacity: 1; visibility: visible; transform: none;
-  transition:
-    background .25s ease, border-radius .25s ease, padding .25s ease,
-    inset .25s ease, right .25s ease, bottom .25s ease, color .25s ease;
+  transition: inset .25s ease, background .25s ease, border-radius .25s ease, padding .25s ease;
 }
+/* H3 always visible; H4 hidden until hover */
 .session-type .session-type-text h3 { margin: 0; font-size: 1rem; line-height: 1.1; }
 .session-type .session-type-text h4 { display: none; margin: .25rem 0 0; font-weight: 600; }
 
 /* Hover: expand to full overlay, show h3+h4, darken bg */
 .session-type:hover .session-type-text {
-  inset: 0; right: auto; bottom: auto;
+  inset: 0;                                   /* fill card */
   display: flex; justify-content: center; align-items: center; flex-direction: column;
   text-align: center; padding: 0; border-radius: inherit; background: rgba(0,0,0,.55);
 }
@@ -102,7 +101,7 @@ nav.is-open .dropdown-links { visibility: visible; opacity: 1; transform: scaleY
   gap: 2rem; padding: 120px 0; overflow: visible;
 }
 
-/* “O nama” tile (popup trigger) — keep title centered everywhere */
+/* “O nama” tile (popup trigger) — keep title centered */
 .about-card {
   display: grid; place-items: center;
   background: #718653; color: #fff;
@@ -157,9 +156,7 @@ nav.is-open .dropdown-links { visibility: visible; opacity: 1; transform: scaleY
 
 .read-more { cursor: pointer; font-weight: 800; text-decoration: underline; }
 .prices-text { position: relative; height: 100%; }
-.prices-description, .all-prices {
-  position: absolute; inset: 0; transition: .4s; transform-origin: top left;
-}
+.prices-description, .all-prices { position: absolute; inset: 0; transition: .4s; transform-origin: top left; }
 .prices-description { transform: scale(0%); }
 .all-prices        { transform: scale(100%); }
 
@@ -179,12 +176,15 @@ section#contact form button {
 section#contact form button:hover { transform: scale(1.02); }
 section#contact form button:active { transform: scale(0.98); }
 
-/* ===================== Footer ===================== */
+/* ===================== Footer (3 columns) ===================== */
 .site-footer { background: #5b703c; color: #f5ffe5; }
 .site-footer a { color: #f5ffe5; text-decoration: none; }
 .site-footer a:hover { text-decoration: underline; }
 
-.footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 2rem; padding: 40px 0; }
+.footer-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr 1fr;   /* ← 3 columns now */
+  gap: 2rem; padding: 40px 0;
+}
 .footer-logo img { width: 180px; height: auto; display: block; }
 .footer-tagline { margin: .75rem 0 0; opacity: .9; }
 
@@ -204,6 +204,16 @@ section#contact form button:active { transform: scale(0.98); }
 .footer-bottom-inner { display: flex; align-items: center; justify-content: space-between; }
 .footer-lang { background: #d7e8be; color: #5b703c !important; padding: .35rem .6rem; border-radius: .5rem; font-weight: 700; text-decoration: none !important; }
 .site-footer .container { width: min(1200px, 80%); }
+
+/* ===================== Therapist name badge ===================== */
+.therapist { position: relative; }
+.therapist-name-badge {
+  position: absolute; inset: auto 10px 10px auto;   /* corner pill like sessions */
+  z-index: 2; padding: 8px 12px; border-radius: 14px;
+  background: rgba(0,0,0,.4); color: #fff; font-weight: 700; font-size: .95rem; line-height: 1.1;
+  pointer-events: none; transition: opacity .25s ease, background .25s ease;
+}
+.therapist:hover .therapist-name-badge { opacity: 0; }
 
 /* ===================== Media Queries ===================== */
 @media (max-width: 1400px) {
@@ -227,7 +237,7 @@ section#contact form button:active { transform: scale(0.98); }
   .prices-img { display: none; }
   nav { margin: 0 15%; }
 
-  /* Footer layout */
+  /* Footer layout at tablet */
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -239,7 +249,8 @@ section#contact form button:active { transform: scale(0.98); }
   /* Card + corner pill radii */
   .session-type { border-radius: 25px; }
   .session-type .session-type-text {
-    border-radius: 12px; right: 8px; bottom: 8px; padding: 6px 10px; background: rgba(0,0,0,.2);
+    inset: auto 8px 8px auto;
+    border-radius: 12px; padding: 6px 10px; background: rgba(0,0,0,.2);
   }
 
   .about-grid { grid-template-columns: 1fr; padding: 70px 0; }
@@ -251,42 +262,10 @@ section#contact form button:active { transform: scale(0.98); }
   /* Footer compact */
   .footer-grid { grid-template-columns: 1fr; gap: 1.2rem; }
   .footer-bottom-inner { flex-direction: column; gap: .5rem; align-items: flex-start; }
-}
 
-
-/* Always-visible therapist name badge (lower-right) */
-.therapist {
-  position: relative;
-}
-
-.therapist-name-badge {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  z-index: 2;                 /* above image, below tooltip */
-  padding: 8px 12px;
-  border-radius: 14px;
-  background: rgba(0,0,0,.4); /* light by default, like sessions */
-  color: #fff;
-  font-weight: 700;
-  font-size: .95rem;
-  line-height: 1.1;
-  pointer-events: none;       /* clicks pass through to the card */
-  transition: opacity .25s ease, background .25s ease;
-}
-
-/* On hover, fade the badge so your existing tooltip has center-stage */
-.therapist:hover .therapist-name-badge {
-  opacity: 0;
-}
-
-/* Mobile tweak to match your small pill sizing */
-@media (max-width: 640px) {
+  /* Therapist badge size */
   .therapist-name-badge {
-    right: 8px;
-    bottom: 8px;
-    padding: 6px 10px;
-    border-radius: 12px;
-    font-size: .9rem;
+    inset: auto 8px 8px auto;
+    padding: 6px 10px; border-radius: 12px; font-size: .9rem;
   }
 }
