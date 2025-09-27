@@ -1,43 +1,21 @@
 /* ===================== Reset & Base ===================== */
 * { box-sizing: border-box; }
-/* * { outline: 1px solid red; } */
-
-html {
-  overflow-x: hidden;
-  scrollbar-gutter: stable;
-}
-
+html { overflow-x: hidden; scrollbar-gutter: stable; }
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: #889b6d; /* page fallback */
-  font-family: "Fraunces", serif;
-  color: #fff;
-  letter-spacing: 0.15rem;
+  margin: 0; min-height: 100vh; background: #889b6d;
+  font-family: "Fraunces", serif; color: #fff; letter-spacing: 0.15rem;
 }
-
 h1 { font-size: 2rem; margin: 0 0 .6rem; }
 h2 { font-size: 1.8rem; margin: .2rem 0 .6rem; }
 
 /* ===================== Layout Helpers ===================== */
 .section { position: relative; width: 100%; overflow: visible; }
+.container { width: min(1200px, 60%); margin: 0 auto; }
 
-.container {
-  width: min(1200px, 60%);
-  margin: 0 auto;
-}
-
-/* full-bleed wave separators; set --top/--bottom inline */
+/* Full-bleed wave separators (set --top/--bottom inline) */
 .wave-sep {
-  display: block;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
-  height: 180px;
-  line-height: 0;
-  --top: #889b6d;
-  --bottom: #d7e8be;
+  display: block; position: relative; left: 50%; transform: translateX(-50%);
+  width: 100vw; height: 180px; line-height: 0; --top: #889b6d; --bottom: #d7e8be;
 }
 .wave-sep svg { display: block; width: 100%; height: 100%; }
 
@@ -49,39 +27,27 @@ h2 { font-size: 1.8rem; margin: .2rem 0 .6rem; }
 
 /* ===================== Navigation ===================== */
 nav {
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 20%;
-  position: relative;
-  z-index: 3000;
+  padding: 10px; display: flex; align-items: center; justify-content: space-between;
+  margin: 0 20%; position: relative; z-index: 3000;
 }
-
 nav #logo { width: 200px; }
 nav .links { display: flex; }
 
 nav .links a,
 nav .dropdown-links a {
-  margin-left: 15px;
-  text-decoration: none;
-  font-size: 1.2rem;
-  padding-right: 15px;
-  color: white;
+  margin-left: 15px; padding-right: 15px; color: #fff;
+  text-decoration: none; font-size: 1.2rem;
 }
 nav .links a:last-child { padding-right: 0; }
-nav .links a:not(:last-child) { border-right: 2px solid white; }
+nav .links a:not(:last-child) { border-right: 2px solid #fff; }
 
 #hamburger { display: none; background: none; border: none; cursor: pointer; color: #fff; }
 
 .dropdown-links {
-  position: absolute;
-  right: 0; top: 100%;
-  background: #d7e8be; color: #5b703c;
-  padding: 20px; gap: 10px;
+  position: absolute; right: 0; top: 100%;
+  background: #d7e8be; color: #5b703c; padding: 20px; gap: 10px;
   display: flex; flex-direction: column;
-  visibility: hidden; opacity: 0; transform: scaleY(50%);
-  transform-origin: top;
+  visibility: hidden; opacity: 0; transform: scaleY(50%); transform-origin: top;
   transition: .3s;
 }
 .dropdown-links a { color: #5b703c; }
@@ -89,139 +55,93 @@ nav.is-open .dropdown-links { visibility: visible; opacity: 1; transform: scaleY
 
 /* ===================== Sessions ===================== */
 #sessions .container { padding: 100px 0 80px; }
-
 #sessions-titles h1 { font-size: 2.3rem; text-align: center; }
 #sessions-titles h2 { margin-top: 30px; text-align: center; font-size: 2rem; }
 
 #session-types {
-  margin-top: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 55px;
+  margin-top: 40px; display: flex; align-items: center; justify-content: space-between; gap: 55px;
 }
 
 .session-type {
-  flex: 1;
-  position: relative;
-  border-radius: 50px;
-  cursor: pointer;
-  overflow: hidden;
+  flex: 1; position: relative; border-radius: 50px; cursor: pointer; overflow: hidden;
 }
-.session-type .session-type-image { width: 100%; display: block; }
-.session-type:hover .session-type-image { filter: blur(10px); }
+.session-type .session-type-image { width: 100%; display: block; border-radius: inherit; }
 
+/* Corner label (default) → full overlay (hover) */
 .session-type .session-type-text {
-  opacity: 0;
-  transition: .5s;
-  color: #fff;
-  background: rgba(0,0,0,.4);
-  position: absolute; inset: 0;
-  border-radius: 50px;
-  display: flex; align-items: center; justify-content: center; flex-direction: column;
+  position: absolute; right: 10px; bottom: 10px;
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: 8px 12px; background: rgba(0,0,0,.2); color: #fff; border-radius: 14px;
+  opacity: 1; visibility: visible; transform: none;
+  transition:
+    background .25s ease, border-radius .25s ease, padding .25s ease,
+    inset .25s ease, right .25s ease, bottom .25s ease, color .25s ease;
 }
-.session-type:hover .session-type-text { opacity: 1; }
+.session-type .session-type-text h3 { margin: 0; font-size: 1rem; line-height: 1.1; }
+.session-type .session-type-text h4 { display: none; margin: .25rem 0 0; font-weight: 600; }
+
+/* Hover: expand to full overlay, show h3+h4, darken bg */
+.session-type:hover .session-type-text {
+  inset: 0; right: auto; bottom: auto;
+  display: flex; justify-content: center; align-items: center; flex-direction: column;
+  text-align: center; padding: 0; border-radius: inherit; background: rgba(0,0,0,.55);
+}
+.session-type:hover .session-type-text h3 { font-size: 1.4rem; margin: 0 0 .25rem; }
+.session-type:hover .session-type-text h4 { display: block; font-size: 1rem; opacity: .95; }
+.session-type:hover .session-type-image { filter: blur(10px); }
 
 #individual  { background: #a9bb91; }
 #couples     { background: #718653; }
 #adolescents { background: #5b703c; }
 
 /* ===================== ABOUT (no overlay; tooltip on hover) ===================== */
-#about-us .container { position: relative; overflow: visible; }
+#about-us .container { position: relative; overflow: visible; padding: 0 25px; }
 
 .about-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  padding: 120px 0;
-  overflow: visible; /* allow tooltips to escape */
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 2rem; padding: 120px 0; overflow: visible;
 }
 
-/* “O nama” tile (acts as popup trigger) */
+/* “O nama” tile (popup trigger) — keep title centered everywhere */
 .about-card {
-  display: grid;
-  place-items: center;
-  background: #718653;
-  color: #fff;
-  border-radius: 70px 0 70px 0;
-  aspect-ratio: 1 / 1;
-  cursor: pointer;
-  transition: transform .2s ease;
+  display: grid; place-items: center;
+  background: #718653; color: #fff;
+  border-radius: 70px 0 70px 0; aspect-ratio: 1 / 1;
+  cursor: pointer; transition: transform .2s ease;
 }
 .about-card:hover { transform: scale(1.02); }
-.about-card h1 { margin: 0; }
+.about-card h1 { margin: 0; text-align: center; }
 
 /* Therapist tiles */
-.therapist {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  z-index: 1;                 /* base */
-}
-.therapist:hover { z-index: 1000; } /* bring above neighbors */
-
-.therapist-image {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  border-radius: 70px;
-}
+.therapist { position: relative; aspect-ratio: 1 / 1; z-index: 1; }
+.therapist:hover { z-index: 1000; }
+.therapist-image { width: 100%; height: 100%; object-fit: cover; border-radius: 70px; }
 
 /* Tooltip */
 .therapist-text {
-  position: absolute;
-  left: 50%;
-  bottom: -70px;
-  width: 90%;
+  position: absolute; left: 50%; bottom: -70px; width: 90%;
   transform: translateX(-50%) scale(.45);
-  background: #718653;
-  color: #fff;
-  border-radius: 50px;
-  padding: 9px;
-  text-align: center;
-  visibility: hidden;
-  transition: transform .25s ease;
-  z-index: 1001;              /* above hovered tile */
+  background: #718653; color: #fff; border-radius: 50px; padding: 9px; text-align: center;
+  visibility: hidden; transition: transform .25s ease; z-index: 1001;
 }
-.therapist:hover .therapist-text {
-  visibility: visible;
-  transform: translateX(-50%) scale(1);
-}
+.therapist:hover .therapist-text { visibility: visible; transform: translateX(-50%) scale(1); }
 .therapist-text p { margin: 0; }
 
-/* ===== O nama popup (no dark overlay) ===== */
-.about-popup {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;    /* allow clicks to pass when closed */
-  z-index: 5000;
-}
+/* ===== About popup (no dark overlay) ===== */
+.about-popup { position: fixed; inset: 0; pointer-events: none; z-index: 5000; }
 .about-popup.is-open { pointer-events: auto; }
-
 .about-popup__panel {
-  position: absolute;
-  top: 24px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-10px);
-  width: min(1200px, 70vw);
-  max-height: 85vh;
-  overflow: auto;
-  background: #718653;
-  color: #fff;
-  border-radius: 28px;
-  padding: clamp(16px, 3vw, 48px);
-  box-shadow: 0 20px 60px rgba(0,0,0,.35);
-  opacity: 0;
-  transition: opacity .25s ease, transform .35s cubic-bezier(.2,.8,.2,1);
+  position: absolute; top: 24px; left: 50%; transform: translateX(-50%) translateY(-10px);
+  width: min(1200px, 70vw); max-height: 85vh; overflow: auto;
+  background: #718653; color: #fff; border-radius: 28px;
+  padding: clamp(16px, 3vw, 48px); box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  opacity: 0; transition: opacity .25s ease, transform .35s cubic-bezier(.2,.8,.2,1);
 }
-.about-popup.is-open .about-popup__panel {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
+.about-popup.is-open .about-popup__panel { opacity: 1; transform: translateX(-50%) translateY(0); }
 .about-popup__close {
   position: sticky; top: 0; margin-left: auto;
-  width: 40px; height: 40px; border-radius: 50%;
-  border: 0; background: rgba(255,255,255,.15); color: #fff;
-  font-size: 22px; cursor: pointer; display: grid; place-items: center;
+  width: 40px; height: 40px; border-radius: 50%; border: 0;
+  background: rgba(255,255,255,.15); color: #fff; font-size: 22px; cursor: pointer; display: grid; place-items: center;
 }
 
 /* ===================== Prices ===================== */
@@ -231,148 +151,59 @@ nav.is-open .dropdown-links { visibility: visible; opacity: 1; transform: scaleY
 .prices-single { display: flex; gap: 9px; min-height: 22rem; }
 #prices-couple { flex-direction: row-reverse; }
 
-.prices-text-content {
-  flex: 1;
-  background: #889b6d;
-  padding: 25px;
-  border-radius: 35px;
-}
+.prices-text-content { flex: 1; background: #889b6d; padding: 25px; border-radius: 35px; }
 .prices-img { flex: 1; transition: .3s; }
 .prices-img img { width: 100%; height: 100%; border-radius: 35px; object-fit: cover; }
 
 .read-more { cursor: pointer; font-weight: 800; text-decoration: underline; }
-
 .prices-text { position: relative; height: 100%; }
 .prices-description, .all-prices {
-  position: absolute; inset: 0;
-  transition: .4s; transform-origin: top left;
+  position: absolute; inset: 0; transition: .4s; transform-origin: top left;
 }
 .prices-description { transform: scale(0%); }
 .all-prices        { transform: scale(100%); }
 
 /* ===================== Contact ===================== */
 #contact .container { padding: 100px 0 140px; }
-
 section#contact form {
-  color: #f5ffe5;
-  display: flex; flex-direction: column;
-  margin: 0 auto; max-width: 640px;
+  color: #f5ffe5; display: flex; flex-direction: column; margin: 0 auto; max-width: 640px;
 }
 section#contact form input,
 section#contact form textarea {
   border: none; border-radius: 5px; margin: 5px; padding: 8px;
 }
 section#contact form button {
-  background: #d7e8be; color: #5b703c;
-  padding: 10px 12px; border: none; margin: 5px;
+  background: #d7e8be; color: #5b703c; padding: 10px 12px; border: none; margin: 5px;
   font-size: 1.1rem; border-radius: 6px; cursor: pointer; transition: .2s;
 }
 section#contact form button:hover { transform: scale(1.02); }
 section#contact form button:active { transform: scale(0.98); }
 
-
-/* ===== Footer ===== */
-.site-footer {
-  background: #5b703c; /* a bit darker than header green */
-  color: #f5ffe5;
-}
+/* ===================== Footer ===================== */
+.site-footer { background: #5b703c; color: #f5ffe5; }
 .site-footer a { color: #f5ffe5; text-decoration: none; }
 .site-footer a:hover { text-decoration: underline; }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr 1fr;
-  gap: 2rem;
-  padding: 40px 0;
-}
-
+.footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 2rem; padding: 40px 0; }
 .footer-logo img { width: 180px; height: auto; display: block; }
 .footer-tagline { margin: .75rem 0 0; opacity: .9; }
 
-.footer-links {
-  display: flex; flex-direction: column; gap: .4rem;
-}
-
+.footer-links { display: flex; flex-direction: column; gap: .4rem; }
 .footer-contact p { margin: 0 0 .8rem; }
 
 .footer-social-title { margin: 0 0 .5rem; font-weight: 700; }
 .social-row { display: flex; gap: .6rem; align-items: center; flex-wrap: wrap; }
 .social-btn {
-  display: inline-grid; place-items: center;
-  width: 40px; height: 40px; border-radius: 50%;
-  background: rgba(255,255,255,.15);
-  transition: transform .15s ease, background .15s ease;
+  display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,.15); transition: transform .15s ease, background .15s ease;
 }
 .social-btn:hover { transform: translateY(-2px); background: rgba(255,255,255,.25); }
 .social-btn svg { width: 20px; height: 20px; fill: #f5ffe5; }
 
-.footer-bottom {
-  background: #4a5d33;
-  padding: 10px 0;
-}
-.footer-bottom-inner {
-  display: flex; align-items: center; justify-content: space-between;
-}
-.footer-lang {
-  background: #d7e8be; color: #5b703c !important;
-  padding: .35rem .6rem; border-radius: .5rem; font-weight: 700;
-  text-decoration: none !important;
-}
-.footer-lang:hover { filter: brightness(0.98); }
-
-/* --- Footer alignment fixes --- */
-.footer-grid {
-  align-items: flex-start;     /* vertical alignment of each column */
-  justify-items: start;        /* horizontal placement of items inside each grid cell */
-}
-
-.footer-brand,
-.footer-links,
-.footer-contact,
-.footer-social {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;     /* make sure contents aren't centered */
-  text-align: left;
-}
-
-.footer-links a {
-  display: inline-block;
-  padding: 2px 0;              /* tighten spacing a bit */
-}
-
-/* Optional: widen the footer container a touch so it feels less “centered” overall */
-.site-footer .container {
-  width: min(1200px, 80%);
-}
-
-/* Mobile: keep left-aligned to avoid the “floating in the middle” look */
-@media (max-width: 640px) {
-  .footer-grid {
-    justify-items: start;
-  }
-  .footer-bottom-inner {
-    align-items: flex-start;
-  }
-}
-
-
-
-/* Responsive */
-@media (max-width: 1024px) {
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media (max-width: 640px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-  }
-  .footer-bottom-inner { flex-direction: column; gap: .5rem; }
-}
-
-
+.footer-bottom { background: #4a5d33; padding: 10px 0; }
+.footer-bottom-inner { display: flex; align-items: center; justify-content: space-between; }
+.footer-lang { background: #d7e8be; color: #5b703c !important; padding: .35rem .6rem; border-radius: .5rem; font-weight: 700; text-decoration: none !important; }
+.site-footer .container { width: min(1200px, 80%); }
 
 /* ===================== Media Queries ===================== */
 @media (max-width: 1400px) {
@@ -380,64 +211,82 @@ section#contact form button:active { transform: scale(0.98); }
   nav .links { display: none; }
   #hamburger { display: block; }
   .container { width: min(1200px, 70%); }
-
-    nav .links a,
-nav .dropdown-links a {
-  color: #5b703c;
-}
+  nav .links a, nav .dropdown-links a { color: #5b703c; }
 }
 
 @media (max-width: 1024px) {
   html { font-size: 90%; }
   .container { width: min(100%, 85%); }
-
   #session-types { gap: 20px; flex-direction: column; width: 60%; margin-inline: auto; }
-
   .about-grid { gap: 1rem; padding: 90px 0; }
   .therapist-image { border-radius: 35px; }
   .therapist-text  { border-radius: 30px; }
-
   .about-popup__panel { width: min(1100px, 86vw); }
-
   .prices-single { flex-direction: column; }
   .prices-text-content { min-height: 16rem; }
   .prices-img { display: none; }
+  nav { margin: 0 15%; }
 
-  nav {
-  margin: 0 15%;
-  }
-
-
+  /* Footer layout */
+  .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 640px) {
   .container { width: min(100%, 90%); }
-
   #session-types { width: 70%; }
-
   #sessions .container { padding: 80px 0 60px; }
-  .session-type, .session-type .session-type-text { border-radius: 25px; }
+
+  /* Card + corner pill radii */
+  .session-type { border-radius: 25px; }
+  .session-type .session-type-text {
+    border-radius: 12px; right: 8px; bottom: 8px; padding: 6px 10px; background: rgba(0,0,0,.2);
+  }
 
   .about-grid { grid-template-columns: 1fr; padding: 70px 0; }
-  /* .about-card, .therapist { aspect-ratio: 3 / 4; } */
   .therapist-text { bottom: -40px; padding: 6px; border-radius: 20px; transform: translateX(-50%) scale(.6); }
+  .about-popup__panel { width: 92vw; max-height: 88vh; border-radius: 22px; }
+  nav { margin: 0 10%; }
+  .prices-single { min-height: 27rem; }
 
-  .about-popup__panel {
-    width: 92vw;
-    max-height: 88vh;
-    border-radius: 22px;
-  }
-
-  }
-#about-us .container {
-    padding: 0 25px;
+  /* Footer compact */
+  .footer-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+  .footer-bottom-inner { flex-direction: column; gap: .5rem; align-items: flex-start; }
 }
 
 
-  nav {
-  margin: 0 10%;
+/* Always-visible therapist name badge (lower-right) */
+.therapist {
+  position: relative;
+}
+
+.therapist-name-badge {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;                 /* above image, below tooltip */
+  padding: 8px 12px;
+  border-radius: 14px;
+  background: rgba(0,0,0,.4); /* light by default, like sessions */
+  color: #fff;
+  font-weight: 700;
+  font-size: .95rem;
+  line-height: 1.1;
+  pointer-events: none;       /* clicks pass through to the card */
+  transition: opacity .25s ease, background .25s ease;
+}
+
+/* On hover, fade the badge so your existing tooltip has center-stage */
+.therapist:hover .therapist-name-badge {
+  opacity: 0;
+}
+
+/* Mobile tweak to match your small pill sizing */
+@media (max-width: 640px) {
+  .therapist-name-badge {
+    right: 8px;
+    bottom: 8px;
+    padding: 6px 10px;
+    border-radius: 12px;
+    font-size: .9rem;
   }
-
-  .prices-single { min-height: 27rem; }
-
 }

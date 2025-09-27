@@ -27,29 +27,53 @@
       </div>
 
       <div id="session-types">
-        <div class="session-type" id="individual">
-          <img src="{{ url_for('static', filename='images/individualna.png') }}" alt="{{ 'Individualna seansa' if is_sr else 'Individual session' }}" class="session-type-image">
+        <!-- INDIVIDUAL (link to prices-individual) -->
+        <a
+          class="session-type"
+          id="individual"
+          href="#prices-individual"
+          aria-label="{{ 'Idi na cene individualnih seansi' if is_sr else 'Go to Individual session prices' }}"
+        >
+          <img src="{{ url_for('static', filename='images/individualna.png') }}"
+               alt="{{ 'Individualna seansa' if is_sr else 'Individual session' }}"
+               class="session-type-image">
           <div class="session-type-text">
             <h3>{{ 'Individualna' if is_sr else 'Individual' }}</h3>
             <h4>{{ 'Za mene' if is_sr else 'For me' }}</h4>
           </div>
-        </div>
+        </a>
 
-        <div class="session-type" id="couples">
-          <img src="{{ url_for('static', filename='images/partner.png') }}" alt="{{ 'Partnerska seansa' if is_sr else 'Couples session' }}" class="session-type-image">
+        <!-- COUPLES (link to prices-couple) -->
+        <a
+          class="session-type"
+          id="couples"
+          href="#prices-couple"
+          aria-label="{{ 'Idi na cene partnerskih seansi' if is_sr else 'Go to Couples session prices' }}"
+        >
+          <img src="{{ url_for('static', filename='images/partner.png') }}"
+               alt="{{ 'Partnerska seansa' if is_sr else 'Couples session' }}"
+               class="session-type-image">
           <div class="session-type-text">
             <h3>{{ 'Partnerska' if is_sr else 'Couples' }}</h3>
             <h4>{{ 'Za nas' if is_sr else 'For us' }}</h4>
           </div>
-        </div>
+        </a>
 
-        <div class="session-type" id="adolescents">
-          <img src="{{ url_for('static', filename='images/dete.png') }}" alt="{{ 'Adolescenti seanse' if is_sr else 'Adolescents sessions' }}" class="session-type-image">
+        <!-- ADOLESCENTS (link to prices-teen) -->
+        <a
+          class="session-type"
+          id="adolescents"
+          href="#prices-teen"
+          aria-label="{{ 'Idi na cene seansi za adolescente' if is_sr else 'Go to Adolescent session prices' }}"
+        >
+          <img src="{{ url_for('static', filename='images/dete.png') }}"
+               alt="{{ 'Adolescenti seanse' if is_sr else 'Adolescents sessions' }}"
+               class="session-type-image">
           <div class="session-type-text">
             <h3>{{ 'Adolescenti' if is_sr else 'Adolescents' }}</h3>
             <h4>{{ 'Za moje dete' if is_sr else 'For my child' }}</h4>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </section>
@@ -73,16 +97,20 @@
 
         <!-- Therapist cards (now links) -->
         {# Therapist cards (data-driven) #}
-{% for t in therapists %}
+        {% for t in therapists %}
   <a class="therapist"
      href="{{ url_for_therapist(t.slug) }}"
      aria-label="{{ 'Profil terapeuta: ' if is_sr else 'Therapist profile: ' }}{{ t.name }}">
     <img class="therapist-image"
          src="{{ url_for('static', filename=t.image) }}"
          alt="{{ t.name }}">
+
+    <!-- Always-visible corner pill -->
+    <span class="therapist-name-badge">{{ t.name }}</span>
+
+    <!-- Existing hover tooltip (unchanged) -->
     <div class="therapist-text">
-      <p>{{ t.name }}</p>
-      {# if you add titles_en in JSON, tfield will return localized list; otherwise falls back to titles #}
+      <p class="therapist-name">{{ t.name }}</p>
       {% set titles_local = tfield(t, 'titles', current_lang) or t.titles %}
       {% for title in titles_local %}
         <p>{{ title }}</p>
@@ -306,7 +334,6 @@
     });
   }
 
-
   // O NAMA / ABOUT popup (no overlay)
   const aboutTrigger = document.getElementById('about-us-text');
   const aboutPopup   = document.getElementById('about-popup');
@@ -315,9 +342,7 @@
   function openAbout() { if (aboutPopup) aboutPopup.classList.add('is-open'); }
   function closeAbout() { if (aboutPopup) aboutPopup.classList.remove('is-open'); }
 
-  if (aboutTrigger && aboutPopup) {
-    aboutTrigger.addEventListener('click', openAbout);
-  }
+  if (aboutTrigger && aboutPopup) { aboutTrigger.addEventListener('click', openAbout); }
   if (aboutClose) aboutClose.addEventListener('click', closeAbout);
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAbout(); });
 </script>
