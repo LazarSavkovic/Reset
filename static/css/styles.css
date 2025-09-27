@@ -438,4 +438,6 @@ nav .dropdown-links a {
   margin: 0 10%;
   }
 
+  .prices-single { min-height: 27rem; }
+
 }
