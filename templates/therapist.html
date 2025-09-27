@@ -72,73 +72,8 @@
     </div>
   </section>
 
-  <!-- Wave: hero -> details -->
-  <div class="wave-sep" style="--top:#d7e8be; --bottom:#f5ffe5;">
-    <svg viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
-      <rect width="1440" height="200" fill="var(--bottom)"></rect>
-      <path d="M0,60 C240,140 600,0 900,60 C1120,105 1280,120 1440,80 L1440,0 L0,0 Z" fill="var(--top)"></path>
-    </svg>
-  </div>
-
-  <!-- =============== DETAILS (re-using price card styling) =============== -->
-  <section class="section section--prices" id="therapist-details">
-    <div class="container">
-      <div class="prices-content">
-        <div class="prices-single">
-          <div class="prices-text-content">
-            <h3>{{ 'Rad sa klijentima' if is_sr else 'Working with clients' }}</h3>
-            <p>
-              {% if is_sr %}
-                {{ therapist.name }} radi sa klijentima online i uživo u Beogradu, u trajanju od oko 50 minuta po seansi.
-                Fokus je na praktičnim, dokazanim tehnikama i toplom, podržavajućem pristupu.
-              {% else %}
-                {{ therapist.name }} works with clients online and in person in Belgrade. Sessions last about 50 minutes.
-                The approach is practical, evidence-based, and supportive.
-              {% endif %}
-            </p>
-
-            <p class="read-more"
-               data-open-label="{{ 'Cene' if is_sr else 'Details' }}"
-               data-closed-label="{{ 'Saznaj više' if is_sr else 'Read more' }}">
-              {{ 'Saznaj više' if is_sr else 'Read more' }}
-            </p>
-
-            <div class="prices-text">
-              <div class="prices-description">
-                <p>
-                  {% if is_sr %}
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque suscipit arcu sit amet
-                    pulvinar hendrerit. Integer in arcu sed nibh imperdiet aliquet. (Zamenite stvarnim opisom pristupa/metoda.)
-                  {% else %}
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque suscipit arcu sit amet
-                    pulvinar hendrerit. Replace this with real method/approach copy in English.
-                  {% endif %}
-                </p>
-              </div>
-              <div class="all-prices">
-                {% if is_sr %}
-                  <p><span>Individualno:</span> 50 min (cena po stranici Cene)</p>
-                  <p><span>Jezici:</span> Srpski, Engleski (dodatak prema stranici Cene)</p>
-                  <p><span>Format:</span> Online ili uživo</p>
-                {% else %}
-                  <p><span>Individual:</span> ~50 min (see Pricing page)</p>
-                  <p><span>Languages:</span> Serbian, English (English surcharge per Pricing)</p>
-                  <p><span>Format:</span> Online or in-person</p>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-
-          <div class="prices-img">
- <img src="{{ url_for('static', filename='images/prices-individual.png') }}" alt="{{ 'Individualne cene' if is_sr else 'Individual session pricing' }}">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Wave: details -> contact -->
-  <div class="wave-sep" style="--top:#f5ffe5; --bottom:#889b6d;">
+  <!-- Wave: hero -> contact -->
+  <div class="wave-sep" style="--top:#d7e8be; --bottom:#889b6d;">
     <svg viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
       <rect width="1440" height="200" fill="var(--bottom)"></rect>
       <path d="M0,60 C240,140 600,0 900,60 C1120,105 1280,120 1440,80 L1440,0 L0,0 Z" fill="var(--top)"></path>
@@ -177,28 +112,6 @@
 
 </main>
 
-<!-- Localized read-more toggle -->
-<script>
-  for (let readMore of document.getElementsByClassName('read-more')) {
-    const OPEN = readMore.getAttribute('data-open-label') || 'Details';
-    const CLOSED = readMore.getAttribute('data-closed-label') || 'Read more';
-    readMore.addEventListener('click', () => {
-      const wrap = readMore.closest('.prices-single');
-      const pricesImg = wrap?.querySelector('.prices-img');
-      const pricesText = readMore.parentNode.querySelector('.prices-text');
-      const desc = pricesText.querySelector('.prices-description');
-      const all  = pricesText.querySelector('.all-prices');
-
-      const open = !readMore.classList.contains('active');
-      desc.style.transform = open ? 'scale(100%)' : 'scale(0%)';
-      all.style.transform  = open ? 'scale(0%)'   : 'scale(100%)';
-      readMore.classList.toggle('active', open);
-      readMore.textContent = open ? OPEN : CLOSED;
-      if (pricesImg) pricesImg.style.flex = open ? '0' : '1';
-    });
-  }
-</script>
-
 {% if therapist %}
 <script type="application/ld+json">
 {
@@ -215,6 +128,5 @@
 </script>
 <script src="{{ url_for('static', filename='js/nav.js') }}"></script>
 {% endif %}
-
 
 {% endblock %}
